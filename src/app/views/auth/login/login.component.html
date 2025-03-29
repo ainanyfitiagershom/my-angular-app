@@ -31,7 +31,7 @@
                 </li>
                 <li class="nav-item">
                     
-                  <a class="nav-link me-2" href="/register">
+                  <a class="nav-link me-2" href="/inscription">
                     <i class="fas fa-key opacity-6 text-dark me-1"></i>
                     S'inscrire
                   </a>
@@ -49,7 +49,7 @@
       </div>
     </div>
   </div>
-  
+
   <main class="main-content  mt-0">
     <section>
       <div class="page-header min-vh-75">
@@ -62,28 +62,28 @@
                   <p class="mb-0">Entrer votre email et votre mot de passe</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form (ngSubmit)="onSubmit()">
                     <label>Email</label>
                     <div class="mb-3">
-                      <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
+                      <input id="email" type="email" name="email" placeholder="Email" [(ngModel)]="email" class="form-control">
                     </div>
+                  
                     <label>Mot de passe</label>
                     <div class="mb-3">
-                      <input type="email" class="form-control" placeholder="Mot de passe" aria-label="Password" aria-describedby="password-addon">
+                      <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Mot de passe" class="mb-4" required />
                     </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                      <label class="form-check-label" for="rememberMe">Se souvenir de moi ? </label>
-                    </div>
+                  
                     <div class="text-center">
-                      <button type="button" class="btn bg-gradient-info w-100 mt-4 mb-0">Se connecter</button>
+                      <button class="btn bg-gradient-info w-100 mt-4 mb-0" type="submit">Se connecter</button>
                     </div>
                   </form>
+                   `
+
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     Vous n'avez pas encore de compte ?
-                    <a href="/register" class="text-info text-gradient font-weight-bold">S'inscrire</a>
+                    <a href="/inscription" class="text-info text-gradient font-weight-bold">S'inscrire</a>
                 </p>
                 </div>
               </div>

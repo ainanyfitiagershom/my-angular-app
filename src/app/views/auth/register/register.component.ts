@@ -1,10 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, NgForm , ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -14,6 +17,15 @@ export class RegisterComponent {
   //     console.log(form.value); // { username: '...', password: '...' }
   //   }
   // }
+
+  userObject = {
+    "username":"",
+    "email":"",
+    "password":"",
+    "tel":""
+  }
+
+  http = inject(HttpClient);
 
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
@@ -27,16 +39,28 @@ export class RegisterComponent {
 
   message: string = '';
 
-  onSubmit() {
-    if (this.registerForm.valid) {
-      this.authService.userRegister(this.registerForm.value).subscribe({
-        next: (response) => {
-          this.message = 'Inscription réussie ! Vérifiez votre e-mail pour le code de validation.';
-        },
-        error: (err) => {
-          this.message = err.error.erreur || 'Erreur lors de l\'inscription';
-        }
-      });
-    }
+  // onSubmit(): void {
+  //   if (this.registerForm.invalid) {
+  //     console.warn('❌ Formulaire invalide, vérifiez les champs.');
+  //     return;
+  //   }
+
+  //   console.log('📤 Envoi des données:', this.registerForm.value);
+
+  //   this.authService.userRegister(this.registerForm.value).subscribe({
+  //     next: (response) => console.log('✅ Inscription réussie !', response),
+  //     error: (error) => console.error('❌ Erreur lors de l’inscription:', error)
+  //   });
+  // }
+
+  onSaveUser() {
+    debugger;
+    this.http.post('http://localhost:5001/api/inscription/formulaire', this.userObject).subscribe((res: any) => {
+      if (res.result) {
+        alert('User added successfully!');
+      } else {
+        alert('User not added!');
+      }
+   }) 
   }
 }

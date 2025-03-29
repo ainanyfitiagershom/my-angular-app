@@ -5,20 +5,22 @@ import { FirstViewComponent } from './views/user/first-view/first-view.component
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
 
     { path: 'login', component: LoginComponent },
 
-    { path: 'register', component: RegisterComponent},
+    { path: 'inscription', component: RegisterComponent},
 
     { path: 'first_view_client', component: FirstViewComponent}
 ];
 
 bootstrapApplication(AppComponent, {
     providers: [
-      provideRouter(routes)
+      provideRouter(routes),
+      provideHttpClient(),
     ]
   });
 

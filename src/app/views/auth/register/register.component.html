@@ -26,7 +26,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link me-2" href="/register">
+            <a class="nav-link me-2" href="/inscription">
               <i class="fas fa-key opacity-6  me-1"></i>
               S'inscrire
             </a>
@@ -63,18 +63,18 @@
               </div>
 
               <div class="card-body">
-                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" role="form text-left">
+                <!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" role="form text-left"> -->
                   <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Name" formControlName="username" />
+                    <input type="text" [(ngModel)]="userObject.username" class="form-control" placeholder="Name" />
                   </div>
                   <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Email" formControlName="email" />
+                    <input type="email" [(ngModel)]="userObject.email" class="form-control" placeholder="Email" />
                   </div>
                   <div class="mb-3">
-                    <input type="password" class="form-control" placeholder="Mot de passe" formControlName="password" />
+                    <input type="password" [(ngModel)]="userObject.password" class="form-control" placeholder="Mot de passe" />
                   </div>
                   <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Telephone" formControlName="tel" />
+                    <input type="text" [(ngModel)]="userObject.tel" class="form-control" placeholder="Telephone" />
                   </div>
                   <!-- <div class="form-check form-check-info text-left">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -83,10 +83,10 @@
                     </label>
                   </div> -->
                   <div class="text-center">
-                    <button class="btn bg-gradient-dark w-100 my-4 mb-2" type="submit">S'inscrire</button>
+                    <button class="btn bg-gradient-dark w-100 my-4 mb-2" (click)="onSaveUser()">S'inscrire</button>
                   </div>
                   <p class="text-sm mt-3 mb-0">Vous avez déjà un compte ? <a href="javascript:;" class="text-dark font-weight-bolder">Se connecter</a></p>
-                </form>
+                <!-- </form> -->
               </div>
             </div>
           </div>
