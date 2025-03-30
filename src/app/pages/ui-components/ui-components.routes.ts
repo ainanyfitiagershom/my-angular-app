@@ -17,6 +17,10 @@ import { AppPaiementComponent } from './paiement/paiement.component';
 import { AppListeFactureComponent } from './liste_facture/liste_facture.component';
 import { AppListsDiagManagerComponent } from './lists_diag_manager/lists_diag.component_manager';
 import { AppAjoutPiecesComponent } from './ajout_pieces/ajout_pieces.component';
+import { AppReparationMecanicienComponent } from './reparation_mecanicien/reparation_mecanicien.component';
+import { AppListsReparationMecanicienComponent } from './lists_reparation_mecanicien/lists_reparation_mecanicien.component';
+import { AppCommencerDiagComponent } from './commencer_diag/commencer_diag.component';
+import { AppStatusReparationMecanicienComponent } from './status_reparation_mecanicien/status_reparation_mecanicien.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -85,6 +89,22 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'ajout_pieces',
         component: AppAjoutPiecesComponent
+      },
+      {
+        path: 'reparations',
+        component: AppReparationMecanicienComponent
+      },
+      {
+        path: 'listes_reparation',
+        component: AppListsReparationMecanicienComponent
+      },
+      {
+        path: 'commencer_diag',
+        component: AppCommencerDiagComponent
+      },
+      {
+        path: 'status_reparation',
+        component: AppStatusReparationMecanicienComponent
       }
     ],
   },

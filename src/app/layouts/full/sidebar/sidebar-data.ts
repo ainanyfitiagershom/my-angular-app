@@ -111,10 +111,29 @@ export const navItems: NavItem[] = [
     route: '/ui-components/lists_diag_manager',
   },
   {
+    displayName: 'Formulaire de reparation',
+    iconName: 'solar:password-minimalistic-input-line-duotone',
+    route: '/ui-components/reparations',
+  },
+  {
+    displayName: 'Listes des reparations',
+    iconName: 'solar:align-left-line-duotone',
+    route: '/ui-components/listes_reparation',
+  },
+  {
     displayName: 'Ajouter pieces',
     iconName: 'solar:settings-line-duotone',
     route: '/ui-components/ajout_pieces',
   },
- 
+  {
+    displayName: 'Commencer reparation',
+    iconName: 'solar:restart-bold-duotone',
+    route: '/ui-components/commencer_diag',
+  },
+  {
+    displayName: 'Liste reparation',
+    iconName: 'solar:bolt-circle-line-duotone',
+    route: '/ui-components/status_reparation',
+  },
  
 ];
