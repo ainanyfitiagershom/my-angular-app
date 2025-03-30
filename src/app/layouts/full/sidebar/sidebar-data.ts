@@ -108,7 +108,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Listes des diagnostiques',
     iconName: 'solar:layers-minimalistic-line-duotone',
-    route: '/ui-components/lists_diag_manager',
+    route: '/ui-components/lists_diag_mecanicien',
   },
   {
     displayName: 'Formulaire de reparation',
@@ -134,6 +134,35 @@ export const navItems: NavItem[] = [
     displayName: 'Liste reparation',
     iconName: 'solar:bolt-circle-line-duotone',
     route: '/ui-components/status_reparation',
+  },
+  {
+    navCap: 'Manager',
+    divider: true,
+  },
+  {
+    displayName: 'Les rendez-vous',
+    iconName: 'solar:file-text-line-duotone',
+    route: '/ui-components/lists_rdv_manager',
+  },
+  {
+    displayName: 'Disponibilité',
+    iconName: 'solar:calendar-mark-line-duotone',
+    route: '/ui-components/disponibilite',
+  },
+  {
+    displayName: 'Confirmer rendez-vous',
+    iconName: 'solar:round-alt-arrow-right-line-duotone',
+    route: '/ui-components/confirmation_rdv_manager',
+  },
+  {
+    displayName: 'Listes des diagnostiques',
+    iconName: 'solar:layers-minimalistic-line-duotone',
+    route: '/ui-components/lists_diag_manager',
+  },
+  {
+    displayName: 'Liste reparation / pieces',
+    iconName: 'solar:settings-line-duotone',
+    route: '/ui-components/lists_reparation_manager',
   },
  
 ];

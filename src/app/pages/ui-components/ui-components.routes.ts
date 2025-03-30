@@ -15,12 +15,17 @@ import { AppEtatVoitureComponent } from './etat_voiture/etat_voiture.component';
 import { AppHistoriqueComponent } from './historique/historique.component';
 import { AppPaiementComponent } from './paiement/paiement.component';
 import { AppListeFactureComponent } from './liste_facture/liste_facture.component';
-import { AppListsDiagManagerComponent } from './lists_diag_manager/lists_diag.component_manager';
 import { AppAjoutPiecesComponent } from './ajout_pieces/ajout_pieces.component';
 import { AppReparationMecanicienComponent } from './reparation_mecanicien/reparation_mecanicien.component';
 import { AppListsReparationMecanicienComponent } from './lists_reparation_mecanicien/lists_reparation_mecanicien.component';
 import { AppCommencerDiagComponent } from './commencer_diag/commencer_diag.component';
 import { AppStatusReparationMecanicienComponent } from './status_reparation_mecanicien/status_reparation_mecanicien.component';
+import { AppListsRdvManagerComponent } from './lists_rdv_manager/lists_rdv_manager.component';
+import { AppConfirmationRdvManagerComponent } from './confirmation_rdv_manager/confirmation_rdv_manager.component';
+import { AppListsDiagMecanicienComponent } from './lists_diag_mecanicien/lists_diag_mecanicien.component';
+import { AppListsDiagManagerComponent } from './lists_diag_manager/lists_diag_manager.componen';
+import { AppListsReparationManagerComponent } from './lists_reparation_manager/lists_reparation_manager.component';
+import { AppDisponibiliteComponent } from './disponibilite/disponibilite.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -83,8 +88,8 @@ export const UiComponentsRoutes: Routes = [
         component: AppListeFactureComponent
       },
       {
-        path: 'lists_diag_manager',
-        component: AppListsDiagManagerComponent
+        path: 'lists_diag_mecanicien',
+        component: AppListsDiagMecanicienComponent
       },
       {
         path: 'ajout_pieces',
@@ -105,6 +110,26 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'status_reparation',
         component: AppStatusReparationMecanicienComponent
+      },
+      {
+        path: 'lists_rdv_manager',
+        component: AppListsRdvManagerComponent
+      },
+      {
+        path: 'confirmation_rdv_manager',
+        component: AppConfirmationRdvManagerComponent
+      },
+      {
+        path: 'lists_diag_manager',
+        component: AppListsDiagManagerComponent
+      },
+      {
+        path: 'lists_reparation_manager',
+        component: AppListsReparationManagerComponent
+      },
+      {
+        path: 'disponibilite',
+        component: AppDisponibiliteComponent
       }
     ],
   },
