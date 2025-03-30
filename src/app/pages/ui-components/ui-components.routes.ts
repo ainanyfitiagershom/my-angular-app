@@ -9,6 +9,7 @@ import { AppTooltipsComponent } from './tooltips/tooltips.component';
 import { AppFormsComponent } from './forms/forms.component';
 import { AppTablesComponent } from './tables/tables.component';
 import { AppListsDiagComponent } from './lists_diag/lists_diag.component';
+import { AppListsReparationComponent } from './lists_reparation/lists_reparation.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -46,6 +47,10 @@ export const UiComponentsRoutes: Routes = [
         path: 'lists_diag',
         component: AppListsDiagComponent,
       },
+      {
+        path: 'lists_reparation',
+        component: AppListsReparationComponent
+      }
     ],
   },
 ];

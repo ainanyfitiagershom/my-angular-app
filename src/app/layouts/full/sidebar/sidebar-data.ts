@@ -29,6 +29,11 @@ export const navItems: NavItem[] = [
     route: '/ui-components/lists_diag',
   },
   {
+    displayName: 'Liste reparation / pieces',
+    iconName: 'solar:file-text-line-duotone',
+    route: '/ui-components/lists_reparation',
+  },
+  {
     displayName: 'Badge',
     iconName: 'solar:archive-minimalistic-line-duotone',
     route: '/ui-components/badge',
