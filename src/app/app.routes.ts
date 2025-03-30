@@ -1,24 +1,51 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent } from './views/auth/register/register.component';
-import { LoginComponent } from './views/auth/login/login.component';
-import { FirstViewComponent } from './views/user/first-view/first-view.component';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { provideRouter } from '@angular/router';
+import { BlankComponent } from './layouts/blank/blank.component';
+import { FullComponent } from './layouts/full/full.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full'},
-
-    { path: 'login', component: LoginComponent },
-
-    { path: 'register', component: RegisterComponent},
-
-    { path: 'first_view_client', component: FirstViewComponent}
+  {
+    path: '',
+    component: FullComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/authentication/login',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./pages/pages.routes').then((m) => m.PagesRoutes),
+      },
+      {
+        path: 'ui-components',
+        loadChildren: () =>
+          import('./pages/ui-components/ui-components.routes').then(
+            (m) => m.UiComponentsRoutes
+          ),
+      },
+      {
+        path: 'extra',
+        loadChildren: () =>
+          import('./pages/extra/extra.routes').then((m) => m.ExtraRoutes),
+      },
+    ],
+  },
+  {
+    path: '',
+    component: BlankComponent,
+    children: [
+      {
+        path: 'authentication',
+        loadChildren: () =>
+          import('./pages/authentication/authentication.routes').then(
+            (m) => m.AuthenticationRoutes
+          ),
+      },
+    ],
+  },
+  {
+    path: '**',
+    redirectTo: 'authentication/error',
+  },
 ];
-
-bootstrapApplication(AppComponent, {
-    providers: [
-      provideRouter(routes)
-    ]
-  });
-
