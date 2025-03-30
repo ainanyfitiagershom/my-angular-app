@@ -10,40 +10,38 @@ import { MatButtonModule } from '@angular/material/button';
 // table 1
 export interface productsData {
   id: number;
-  imagePath: string;
-  uname: string;
-  budget: number;
+  voiture: string;
+  probleme: string;
+  date_debut: Date;
   priority: string;
 }
 
 const PRODUCT_DATA: productsData[] = [
   {
     id: 1,
-    imagePath: 'assets/images/products/product-1.png',
-    uname: 'iPhone 13 pro max-Pacific Blue-128GB storage',
-    budget: 180,
-    priority: 'confirmed',
+    voiture: 'Toyota',
+    probleme: 'Frein',
+    date_debut: new Date('2025-03-30'),     priority: 'Deposer voiture',
   },
   {
     id: 2,
-    imagePath: 'assets/images/products/product-2.png',
-    uname: 'Apple MacBook Pro 13 inch-M1-8/256GB-space',
-    budget: 90,
-    priority: 'cancelled',
+    voiture: 'Renault',
+    probleme: 'Frein',
+    date_debut: new Date('2025-03-30'),     priority: 'En attente',
   },
   {
     id: 3,
-    imagePath: 'assets/images/products/product-3.png',
-    uname: 'PlayStation 5 DualSense Wireless Controller',
-    budget: 120,
-    priority: 'rejected',
+    voiture: 'Subaru',
+    probleme: 'Frein',
+    date_debut: new Date('2025-03-30'), 
+    priority: 'En attente',
   },
   {
     id: 4,
-    imagePath: 'assets/images/products/product-4.png',
-    uname: 'Amazon Basics Mesh, Mid-Back, Swivel Office',
-    budget: 160,
-    priority: 'confirmed',
+    voiture: 'Mazda',
+    probleme: 'Frein',
+    date_debut: new Date('2025-03-30'), 
+    priority: 'Deposer voiture',
   },
 ];
 
@@ -62,6 +60,6 @@ const PRODUCT_DATA: productsData[] = [
 })
 export class AppTablesComponent {
   // table 1
-  displayedColumns1: string[] = ['assigned', 'name', 'priority', 'budget'];
+  displayedColumns1: string[] = ['assigned', 'probleme', 'date_debut', 'priority'];
   dataSource1 = PRODUCT_DATA;
 }

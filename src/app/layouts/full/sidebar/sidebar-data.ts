@@ -19,6 +19,16 @@ export const navItems: NavItem[] = [
     route: '/ui-components/forms',
   },
   {
+    displayName: 'Votre rendez-vous',
+    iconName: 'solar:tablet-line-duotone',
+    route: '/ui-components/tables',
+  },
+  {
+    displayName: 'Liste de diagnostique',
+    iconName: 'solar:bookmark-square-minimalistic-line-duotone',
+    route: '/ui-components/lists_diag',
+  },
+  {
     displayName: 'Badge',
     iconName: 'solar:archive-minimalistic-line-duotone',
     route: '/ui-components/badge',
@@ -29,11 +39,6 @@ export const navItems: NavItem[] = [
     route: '/ui-components/chips',
   },
   {
-    displayName: 'Lists',
-    iconName: 'solar:bookmark-square-minimalistic-line-duotone',
-    route: '/ui-components/lists',
-  },
-  {
     displayName: 'Menu',
     iconName: 'solar:file-text-line-duotone',
     route: '/ui-components/menu',
@@ -42,11 +47,6 @@ export const navItems: NavItem[] = [
     displayName: 'Tooltips',
     iconName: 'solar:text-field-focus-line-duotone',
     route: '/ui-components/tooltips',
-  },
-  {
-    displayName: 'Tables',
-    iconName: 'solar:tablet-line-duotone',
-    route: '/ui-components/tables',
   },
   {
     navCap: 'Extra',
