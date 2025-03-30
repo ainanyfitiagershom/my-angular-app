@@ -15,57 +15,37 @@ export const navItems: NavItem[] = [
   },
   {
     displayName: 'Prendre rendez-vous',
-    iconName: 'solar:file-text-line-duotone',
+    iconName: 'solar:clapperboard-edit-line-duotone',
     route: '/ui-components/forms',
   },
   {
     displayName: 'Votre rendez-vous',
-    iconName: 'solar:tablet-line-duotone',
+    iconName: 'solar:document-text-line-duotone',
     route: '/ui-components/tables',
   },
   {
     displayName: 'Liste de diagnostique',
-    iconName: 'solar:bookmark-square-minimalistic-line-duotone',
+    iconName: 'solar:layers-minimalistic-line-duotone',
     route: '/ui-components/lists_diag',
   },
   {
     displayName: 'Liste reparation / pieces',
-    iconName: 'solar:file-text-line-duotone',
+    iconName: 'solar:settings-line-duotone',
     route: '/ui-components/lists_reparation',
   },
   {
-    displayName: 'Badge',
-    iconName: 'solar:archive-minimalistic-line-duotone',
-    route: '/ui-components/badge',
-  },
-  {
-    displayName: 'Chips',
-    iconName: 'solar:danger-circle-line-duotone',
-    route: '/ui-components/chips',
-  },
-  {
-    displayName: 'Menu',
-    iconName: 'solar:file-text-line-duotone',
-    route: '/ui-components/menu',
-  },
-  {
-    displayName: 'Tooltips',
-    iconName: 'solar:text-field-focus-line-duotone',
-    route: '/ui-components/tooltips',
-  },
-  {
-    navCap: 'Extra',
+    navCap: 'Facture',
     divider: true
   },
   {
-    displayName: 'Icons',
-    iconName: 'solar:sticker-smile-circle-2-line-duotone',
-    route: '/extra/icons',
+    displayName: 'Facture',
+    iconName: 'solar:bill-list-line-duotone',
+    route: '/ui-components/facture',
   },
   {
     displayName: 'Sample Page',
     iconName: 'solar:planet-3-line-duotone',
-    route: '/extra/sample-page',
+    route: '/ui-components/y',
   },
   {
     divider: true,

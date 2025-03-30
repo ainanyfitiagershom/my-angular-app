@@ -8,8 +8,8 @@ import { RouterModule } from '@angular/router';
   template: `
     <a [routerLink]="['/']">
       <img
-        src="./assets/images/logos/logo.svg"
-        class="align-middle m-2"
+        src="./assets/images/logos/logo.png"
+        class="align-middle w-70 h-70 ms-4"
         alt="logo"
       />
     </a>

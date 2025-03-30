@@ -1,0 +1,121 @@
+<mat-card class="cardWithShadow w-80">
+  <mat-card-content>
+    <div class="container">
+            <div class="invoice">
+                <div class="row">
+                    <div class="col-7 mt-n3">
+                        <img src="./assets/images/logos/logo.png" class="logo"/>
+                    </div>
+                    <div class="col-5">
+                        <h3 class="document-type">FACTURE</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 mt-2">
+                        <p class="addressMySam">
+                            <strong>Réparation voiture </strong><br/>
+                            Antananarivo 101<br/>
+                        </p>
+                    </div>
+                    <div class="col-5">
+                        <br/><br/><br/>
+                        <p class="addressDriver">
+                            <strong th:text="${driver.getCompanyName()}">Voiture</strong><br/>
+                             <em th:text="${driver.getUserId()}">Référence voiture</em><br/>
+                        </p>
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <h6>Problème de frein le <span th:text="${start}"> 12 Arvil 2025 </span> au <span th:text="${end}"> 12 Mai 2025</span>
+                </h6>
+                <br/>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Description</th>
+                        <!--<th>Quantité</th>-->
+                        <!--<th>Unité</th>-->
+                        <!--<th>PU TTC</th>-->
+                        <th class="text-right">Total HT</th>
+                        <th class="text-right">Total TTC</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Frein</td>
+                        <td class="text-right">200</td>
+                        <td class="text-right" th:text="${summaryDriverClientsPayment.get('mysamHT')}">200,00€</td>
+                    </tr>
+                    <tr>
+                        <td>Huile</td>
+                        <td class="text-right">100</td>
+                        <td class="text-right" th:text="${summaryDriverPayment.get('mysamHT')}">100,00€</td>
+                    </tr>
+                    <tr>
+                        <td>Volant</td>
+                        <td class="text-right">400</td>
+                        <td class="text-right" th:text="${summaryPenalties.get('driverHT')}">400,00€</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-8">
+                    </div>
+                    <div class="col-4">
+                        <table class="table table-sm text-right">
+                            <tr>
+                                <td><strong>Total HT :</strong></td>
+                                <td class="text-right" th:text="${totalHT}">700,00€</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total TTC :</strong></td>
+                                <td class="text-right" th:text="${totalTTC}">700,00€</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </mat-card-content>
+</mat-card>
+
+
+<style>
+  body {
+  background: #ccc;
+  padding: 30px;
+  font-size: 0.6em;
+}
+
+h6{font-size:1em;}
+
+.container {
+  width: 21cm;
+  min-height: 29.7cm;
+}
+
+.invoice {
+  background: #fff;
+  width: 100%;
+  padding: 50px;
+}
+
+.logo {
+  width: 4cm;
+}
+
+.document-type {
+  text-align: right;
+  color: #444;
+}
+
+.conditions {
+  font-size: 0.7em;
+  color: #666;
+}
+
+.bottom-page {
+  font-size: 0.7em;
+}
+</style>
