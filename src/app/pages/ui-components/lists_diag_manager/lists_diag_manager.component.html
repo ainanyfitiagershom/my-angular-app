@@ -1,0 +1,96 @@
+<mat-card class="cardWithShadow">
+    <mat-card-content>
+      <mat-card-title>Liste de tous les diagnostiques</mat-card-title>
+  
+      <div class="table-responsive">
+        <table mat-table [dataSource]="dataSource1" class="w-100">
+          <!-- Voiture -->
+          <ng-container matColumnDef="assigned">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+              Voiture
+            </th>
+            <td mat-cell *matCellDef="let element">
+                  <h6 class="f-s-14 f-w-600">
+                    {{ element.voiture }}
+                  </h6>
+            </td>
+          </ng-container>
+           <!-- Voiture -->
+
+            <!-- Voiture -->
+          <ng-container matColumnDef="mecanicien">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+              Mecanicien
+            </th>
+            <td mat-cell *matCellDef="let element">
+                  <h6 class="f-s-14 f-w-600">
+                    {{ element.mecanicien }}
+                  </h6>
+            </td>
+          </ng-container>
+           <!-- Voiture -->
+  
+          <!-- observation -->
+          <ng-container matColumnDef="observation">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+                Observation
+            </th>
+            <td mat-cell *matCellDef="let element">        
+              <h6 class="f-s-14 f-w-600">
+                <span class="text-dark f-w-600">{{ element.observation }} </span>
+              </h6>
+            </td>
+          </ng-container>
+          <!-- observation -->
+    
+          <!-- Date de debut -->
+          <ng-container matColumnDef="date_diag">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Date de diagnostique</th>
+            <td mat-cell *matCellDef="let element" class="p-l-0">
+              <div class="d-flex align-items-center">
+                <div class="m-l-16">
+                  <h6 class="f-s-14 f-w-600">
+                    {{ element.date_diag | date: 'fullDate' }}
+                  </h6>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+           <!-- Date de debut -->
+  
+          <!-- Action -->
+          <ng-container matColumnDef="etat">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+              Etat
+            </th>
+            <td mat-cell *matCellDef="let element">
+              @if(element.etat == 'En cours') {
+              <span class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
+                {{ element.etat | titlecase }}
+              </span>
+              }@if(element.etat == 'Terminé') {
+              <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+                {{ element.etat | titlecase }}
+              </span>
+              }
+            </td>
+          </ng-container>
+          <!-- Action -->
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Actions</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-menu-item>
+                  <span>Faire diag</span>
+                  <mat-icon>edit</mat-icon>    
+                </button>          
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>

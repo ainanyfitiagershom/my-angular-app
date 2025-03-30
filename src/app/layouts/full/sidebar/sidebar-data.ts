@@ -2,7 +2,7 @@ import { NavItem } from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
   {
-    navCap: 'Home',
+    navCap: 'Maison',
   },
   {
     displayName: 'Dashboard',
@@ -40,7 +40,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Facture',
     iconName: 'solar:bill-list-line-duotone',
-    route: '/ui-components/facture',
+    route: '/ui-components/liste_facture',
   },
   {
     displayName: 'Etat voiture',
@@ -100,6 +100,20 @@ export const navItems: NavItem[] = [
         route: '/authentication/register',
       },
     ],
+  },
+  {
+    navCap: 'Mecanicien',
+    divider: true,
+  },
+  {
+    displayName: 'Listes des diagnostiques',
+    iconName: 'solar:layers-minimalistic-line-duotone',
+    route: '/ui-components/lists_diag_manager',
+  },
+  {
+    displayName: 'Ajouter pieces',
+    iconName: 'solar:settings-line-duotone',
+    route: '/ui-components/ajout_pieces',
   },
  
  
