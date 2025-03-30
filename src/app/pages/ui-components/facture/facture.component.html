@@ -34,28 +34,25 @@
                     <thead>
                     <tr>
                         <th>Description</th>
-                        <!--<th>Quantité</th>-->
-                        <!--<th>Unité</th>-->
-                        <!--<th>PU TTC</th>-->
-                        <th class="text-right">Total HT</th>
-                        <th class="text-right">Total TTC</th>
+                        <th class="text-right">Quantité</th>
+                        <th class="text-right">Total</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>Frein</td>
-                        <td class="text-right">200</td>
-                        <td class="text-right" th:text="${summaryDriverClientsPayment.get('mysamHT')}">200,00€</td>
+                        <td class="text-right">1</td>
+                        <td class="text-right" th:text="${summaryDriverClientsPayment.get('mysamHT')}">200,00 €</td>
                     </tr>
                     <tr>
                         <td>Huile</td>
-                        <td class="text-right">100</td>
-                        <td class="text-right" th:text="${summaryDriverPayment.get('mysamHT')}">100,00€</td>
+                        <td class="text-right">1</td>
+                        <td class="text-right" th:text="${summaryDriverPayment.get('mysamHT')}">100,00 €</td>
                     </tr>
                     <tr>
                         <td>Volant</td>
-                        <td class="text-right">400</td>
-                        <td class="text-right" th:text="${summaryPenalties.get('driverHT')}">400,00€</td>
+                        <td class="text-right">1</td>
+                        <td class="text-right" th:text="${summaryPenalties.get('driverHT')}">400,00 €</td>
                     </tr>
                     </tbody>
                 </table>

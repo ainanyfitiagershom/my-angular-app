@@ -43,9 +43,23 @@ export const navItems: NavItem[] = [
     route: '/ui-components/facture',
   },
   {
-    displayName: 'Sample Page',
-    iconName: 'solar:planet-3-line-duotone',
-    route: '/ui-components/y',
+    displayName: 'Etat voiture',
+    iconName: 'solar:chart-2-line-duotone',
+    route: '/ui-components/etat_voiture',
+  },
+  {
+    displayName: 'Historique',
+    iconName: 'solar:database-line-duotone',
+    route: '/ui-components/historique',
+  },
+  {
+    navCap: 'Paiement',
+    divider: true
+  },
+  {
+    displayName: 'Paiement',
+    iconName: 'solar:feed-line-duotone',
+    route: '/ui-components/paiement',
   },
   {
     divider: true,

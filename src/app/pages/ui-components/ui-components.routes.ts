@@ -11,6 +11,9 @@ import { AppTablesComponent } from './tables/tables.component';
 import { AppListsDiagComponent } from './lists_diag/lists_diag.component';
 import { AppListsReparationComponent } from './lists_reparation/lists_reparation.component';
 import { AppFactureComponent } from './facture/facture.component';
+import { AppEtatVoitureComponent } from './etat_voiture/etat_voiture.component';
+import { AppHistoriqueComponent } from './historique/historique.component';
+import { AppPaiementComponent } from './paiement/paiement.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -55,6 +58,18 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'facture',
         component: AppFactureComponent
+      },
+      {
+        path: 'etat_voiture',
+        component: AppEtatVoitureComponent
+      },
+      {
+        path: 'historique',
+        component: AppHistoriqueComponent
+      },
+      {
+        path: 'paiement',
+        component: AppPaiementComponent
       }
     ],
   },
