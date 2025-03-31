@@ -1,6 +1,12 @@
 import { NavItem } from './nav-item/nav-item';
 
-export const navItems: NavItem[] = [
+export function getNavItems(role: string): NavItem[] {
+
+  console.log("Rôle reçu dans getNavItems :", role); 
+
+  if (role === 'Client') {
+    return [
+  //start
   {
     navCap: 'Maison',
   },
@@ -9,6 +15,7 @@ export const navItems: NavItem[] = [
     iconName: 'solar:widget-add-line-duotone',
     route: '/dashboard',
   },
+
   {
     navCap: 'A propos',
     divider: true
@@ -101,9 +108,18 @@ export const navItems: NavItem[] = [
       },
     ],
   },
+];
+  }
+  else if (role === 'Mécanicien') {
+    return [
   {
     navCap: 'Mecanicien',
     divider: true,
+  },
+  {
+    displayName: 'Dashboard',
+    iconName: 'solar:widget-add-line-duotone',
+    route: '/dashboard',
   },
   {
     displayName: 'Listes des diagnostiques',
@@ -135,9 +151,18 @@ export const navItems: NavItem[] = [
     iconName: 'solar:bolt-circle-line-duotone',
     route: '/ui-components/status_reparation',
   },
+];
+  }
+  else if (role === 'Manager') {
+    return [
   {
     navCap: 'Manager',
     divider: true,
+  },
+  {
+    displayName: 'Dashboard',
+    iconName: 'solar:widget-add-line-duotone',
+    route: '/dashboard',
   },
   {
     displayName: 'Les rendez-vous',
@@ -163,6 +188,9 @@ export const navItems: NavItem[] = [
     displayName: 'Liste reparation / pieces',
     iconName: 'solar:settings-line-duotone',
     route: '/ui-components/lists_reparation_manager',
-  },
- 
-];
+  }
+] ;
+  }
+
+  return [];
+} //end

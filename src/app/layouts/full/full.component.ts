@@ -14,7 +14,9 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { AppNavItemComponent } from './sidebar/nav-item/nav-item.component';
-import { navItems } from './sidebar/sidebar-data';
+import { getNavItems } from './sidebar/sidebar-data';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { NavItem } from './sidebar/nav-item/nav-item'; 
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -37,7 +39,7 @@ const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
   encapsulation: ViewEncapsulation.None,
 })
 export class FullComponent implements OnInit {
-  navItems = navItems;
+  navItems: NavItem[] = []; 
 
   @ViewChild('leftsidenav')
   public sidenav: MatSidenav;
@@ -60,6 +62,7 @@ export class FullComponent implements OnInit {
     private settings: CoreService,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
+    private authService: AuthService,
   ) {
     this.htmlElement = document.querySelector('html')!;
     this.layoutChangesSubscription = this.breakpointObserver
@@ -84,7 +87,15 @@ export class FullComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const userRole = this.authService.getRole(); // Récupère uniquement le rôle
+
+    if (userRole) {
+      this.navItems = getNavItems(userRole); // ✅ Utilise le rôle pour récupérer les éléments du menu
+    } else {
+      console.error('Rôle manquant');
+    }
+  }
 
   ngOnDestroy() {
     this.layoutChangesSubscription.unsubscribe();

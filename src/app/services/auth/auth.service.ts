@@ -25,13 +25,11 @@ export class AuthService {
         localStorage.setItem('role', response.role); 
         localStorage.setItem('username', response.username); 
         localStorage.setItem('user', JSON.stringify({ _id: response._id })); 
+        console.log("Utilisateur stocké avec succès :", localStorage.getItem('role'));
       })
     );
   }
   
-  
-  
-
   getUserId(): string {
     return localStorage.getItem('userId') || ''; // Stocké après connexion
   }
@@ -45,8 +43,9 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
-    localStorage.removeItem('username');
-    this.router.navigate(['/auth/login']);
+    localStorage.removeItem('username');  
+    localStorage.removeItem('user');
+    this.router.navigate(['/authentication/login']);
   }
 
   // récupérer le token
@@ -56,11 +55,19 @@ export class AuthService {
 
   // récupérer le rôle de l'utilisateur
   getRole(): string | null {
-    return localStorage.getItem('role');
+    const role = localStorage.getItem('role');
+    return role;
   }
 
   // récupérer le nom d'utilisateur
   getUsername(): string | null {
     return localStorage.getItem('username');
   }
+
+  getCurrentUser() {
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
+    console.log("Utilisateur récupéré du localStorage :", user);
+    return user;
+  }
+  
 }
