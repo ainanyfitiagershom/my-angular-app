@@ -70,23 +70,5 @@ export class AuthService {
     return user;
   }
   
-  loginClient(credentials: { email: string, password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login/client`, credentials, {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    }).pipe(
-      tap((response: any) => {
-        localStorage.setItem('token', response.token); 
-  
-        localStorage.setItem('username', response.username); 
-        localStorage.setItem('user', JSON.stringify({ _id: response._id })); 
-  
-        if (response.role) {
-          localStorage.setItem('role', response.role);
-        }
-  
-        console.log("🔐 Connexion réussie - Utilisateur stocké :", response);
-      })
-    );
-  }
   
 }

@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
+import { Observable, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,6 +8,25 @@ export class ClientService {
   private apiUrl = 'http://localhost:5001/api/client';
 
   constructor(private http: HttpClient) {}
+
+  loginClient(credentials: { email: string, password: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/login`, credentials, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    }).pipe(
+      tap((response: any) => {
+        localStorage.setItem('token', response.token); 
+  
+        localStorage.setItem('username', response.username); 
+        localStorage.setItem('user', JSON.stringify({ _id: response._id })); 
+  
+        if (response.role) {
+          localStorage.setItem('role', response.role);
+        }
+  
+        console.log("🔐 Connexion réussie - Utilisateur stocké :", response);
+      })
+    );
+  }
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');

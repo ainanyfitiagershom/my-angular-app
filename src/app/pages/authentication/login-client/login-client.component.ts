@@ -5,8 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ClientService } from 'src/app/services/client/client.service';
 
 @Component({
   selector: 'app-login-client',
@@ -15,7 +14,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AppLoginClientComponent {
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private clientService: ClientService, private router: Router) {}
 
   form = new FormGroup({
     uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -44,7 +43,7 @@ export class AppLoginClientComponent {
   
     console.log('Données envoyées :', loginData);
   
-    this.authService.loginClient(loginData).subscribe({
+    this.clientService.loginClient(loginData).subscribe({
       next: (response) => {
         console.log('Connexion réussie', response);
         this.router.navigate(['/dashboard']);
