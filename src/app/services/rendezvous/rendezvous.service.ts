@@ -64,4 +64,8 @@ export class RendezVousService {
   actionRendezVous(id: string, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/action/${id}`, data, { headers: this.getHeaders() });
   }
+
+  getMecaniciens(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/mecaniciens`, { headers: this.getHeaders() });
+  } 
 }

@@ -5,46 +5,33 @@
   <mat-card-content class="b-t-1">
     <form>
       <div class="row">    
-             <!-- input -->
-             <div class="col-lg-6">
-              <mat-label class="f-w-600 m-b-8 d-block">Date de debut</mat-label>
-              <mat-form-field appearance="outline" class="w-100" color="primary">
-                <input matInput type="date" placeholder="Date de debut" />
-              </mat-form-field>
-            </div>
-            <!-- input -->
-
-                 <!-- input -->
+        <!-- Date de début -->
         <div class="col-lg-6">
-          <mat-label class="f-w-600 m-b-8 d-block">heure</mat-label>
+          <mat-label class="f-w-600 m-b-8 d-block">Date de début</mat-label>
           <mat-form-field appearance="outline" class="w-100" color="primary">
-            <input matInput type="time" placeholder="heure" />
+            <input matInput type="datetime-local" [(ngModel)]="dateDebut" name="date_heure_rdv" placeholder="date debut" />
           </mat-form-field>
         </div>
-        <!-- input -->
-
-            <!-- select -->
-            <div class="col-lg-6">
-              <mat-label class="f-w-600 m-b-8 d-block">Mécanicien</mat-label>
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-select [(value)]="selectedValue">
-                  @for(option of mecanicien; track option.value) {
-                  <mat-option [value]="option.value">{{
-                    option.viewValue
-                    }}</mat-option>
-                  }
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <!-- select -->
-
-
+    
+        <!-- Sélection du mécanicien -->
+        <div class="col-lg-6">
+          <mat-label class="f-w-600 m-b-8 d-block">Mécanicien</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select [(ngModel)]="selectedMecanicien" name="mecanicien">
+              <mat-option *ngFor="let mec of mecaniciens" [value]="mec._id">
+                {{ mec.nom }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
-
+    
       <div class="m-t-12">
-        <button mat-flat-button color="primary" class="m-r-8">Valider</button>
+        <button mat-flat-button color="primary" class="m-r-8" (click)="confirmerRdv()">Valider</button>
         <button mat-stroked-button color="warn">Annuler</button>
       </div>
     </form>
+    
+    
   </mat-card-content>
 </mat-card>

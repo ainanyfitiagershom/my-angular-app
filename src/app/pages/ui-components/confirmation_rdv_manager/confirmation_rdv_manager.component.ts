@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -8,6 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RendezVousService } from 'src/app/services/rendezvous/rendezvous.service';
+import { CommonModule } from '@angular/common'; // Ajoute CommonModule
 
 interface Food {
   value: string;
@@ -27,17 +30,61 @@ interface Food {
     MatInputModule,
     MatCheckboxModule,
     MatListModule,
+    CommonModule
   ],
   templateUrl: './confirmation_rdv_manager.component.html',
 })
-export class AppConfirmationRdvManagerComponent {
+export class AppConfirmationRdvManagerComponent implements OnInit {
+  rdvId: string = '';
+  mecaniciens: any[] = [];
+  selectedMecanicien: string = '';
+  dateDebut: string = '';
 
-  mecanicien: Food[] = [
-    { value: 'steak-0', viewValue: 'Koto' },
-    { value: 'pizza-1', viewValue: 'Koko' },
-    { value: 'tacos-2', viewValue: 'Koka' },
-    { value: 'tacos-3', viewValue: 'Koki' },
-  ];
+  constructor(
+    private route: ActivatedRoute,
+    private rendezVousService: RendezVousService,
+    private router: Router
+  ) {}
 
-  selectedValue = this.mecanicien[0].value;
+  ngOnInit() {
+    // Récupérer l'ID du RDV depuis l'URL
+    this.rdvId = this.route.snapshot.paramMap.get('id') || '';
+
+    // Charger la liste des mécaniciens
+    this.rendezVousService.getMecaniciens().subscribe(
+      (data) => {
+        this.mecaniciens = data;
+      },
+      (error) => {
+        console.error('❌ Erreur lors de la récupération des mécaniciens:', error);
+      }
+    );
+  }
+
+  confirmerRdv() {
+
+    console.log('Date début:', this.dateDebut);
+    console.log('Mécanicien sélectionné:', this.selectedMecanicien);
+
+    if (!this.dateDebut || !this.selectedMecanicien) {
+      alert('Veuillez sélectionner une date et un mécanicien.');
+      return;
+    }
+
+    const data = {
+      date_heure_rdv: this.dateDebut,
+      mecanicien: this.selectedMecanicien
+    };
+
+    this.rendezVousService.confirmerRendezVous(this.rdvId, data).subscribe(
+      response => {
+        console.log("✅ Rendez-vous confirmé :", response);
+        alert('Rendez-vous confirmé avec succès !');
+        this.router.navigate(['/ui-components/lists_diag_manager']); // Redirection après confirmation
+      },
+      error => {
+        console.error("❌ Erreur lors de la confirmation :", error);
+      }
+    );
+  }
 }

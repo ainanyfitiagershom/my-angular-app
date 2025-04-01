@@ -175,11 +175,6 @@ export function getNavItems(role: string): NavItem[] {
     route: '/ui-components/disponibilite',
   },
   {
-    displayName: 'Confirmer rendez-vous',
-    iconName: 'solar:round-alt-arrow-right-line-duotone',
-    route: '/ui-components/confirmation_rdv_manager',
-  },
-  {
     displayName: 'Listes des diagnostiques',
     iconName: 'solar:layers-minimalistic-line-duotone',
     route: '/ui-components/lists_diag_manager',
