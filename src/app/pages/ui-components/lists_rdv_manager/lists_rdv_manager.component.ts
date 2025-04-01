@@ -54,7 +54,7 @@ export class AppListsRdvManagerComponent implements OnInit {
         this.dataSource1 = data.map((rdv: any) => ({
           id: rdv._id,
           client: rdv.client.nom, // Assure-toi que ce champ existe bien
-          voiture: rdv.voiture.model, // Assure-toi que ce champ existe bien
+          voiture: `${rdv.voiture.model.name} - ${rdv.voiture.energie.nom} (${rdv.voiture.transmission.nom})`, // Assure-toi que ce champ existe bien
           probleme: rdv.categorie.map((cat: any) => cat.nom).join(', '),
           date_debut: new Date(rdv.date_heure_rdv),
           commentaire: rdv.commentaire,

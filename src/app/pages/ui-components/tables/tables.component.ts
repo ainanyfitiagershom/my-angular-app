@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { RendezVousService } from '../../../services/rendezvous/rendezvous.service';
-
+import { DiagnosticService } from '../../../services/diagnostic/diagnostic.service';
 // Interface pour la structure des données
 export interface RdvData {
   id: string;
@@ -18,7 +18,6 @@ export interface RdvData {
   probleme: string;
   date_debut: Date;
   commentaire: string;
-  statut: string;
 }
 
 @Component({
@@ -33,14 +32,15 @@ export interface RdvData {
     MatMenuModule,
     MatButtonModule,
   ],
-  templateUrl: './lists_rdv_manager.component.html',
+  templateUrl: './tables.component.html',
 })
 export class AppTablesComponent implements OnInit {
-  displayedColumns1: string[] = ['voiture', 'probleme', 'date_debut', 'commentaire','statut', 'action'];
+  displayedColumns1: string[] = ['voiture', 'probleme', 'date_debut', 'commentaire', 'action'];
   dataSource1: RdvData[] = [];
 
   constructor(
-      private rendezVousService: RendezVousService 
+      private rendezVousService: RendezVousService,
+      private diagnosticService: DiagnosticService 
       
     ) {}
 
@@ -59,7 +59,7 @@ export class AppTablesComponent implements OnInit {
       (data) => {
         this.dataSource1 = data.map((rdv: any) => ({
           id: rdv._id,
-          voiture: rdv.voiture.model, // Assure-toi que ce champ existe bien
+          voiture: `${rdv.voiture.model.name} - ${rdv.voiture.energie.nom} (${rdv.voiture.transmission.nom})`, // Assure-toi que ce champ existe bien
           probleme: rdv.categorie.map((cat: any) => cat.nom).join(', '),
           date_debut: new Date(rdv.date_heure_rdv),
           statut: rdv.statut, // Assure-toi que ce champ existe bien
@@ -72,5 +72,31 @@ export class AppTablesComponent implements OnInit {
     );
   }
 
+  // Valider un rendez-vous
+  validerRdv(id: string) {
+    const data = { action: 'valider' };
+    this.rendezVousService.actionRendezVous(id , data).subscribe(() => {
+      // Mettre à jour la liste après validation
+      this.obtenirListeRdv();
+    });
+  }
  
+   // Valider un rendez-vous
+   annulerRdv(id: string) {
+    const data = { action: 'annuler' };
+    this.rendezVousService.actionRendezVous(id , data).subscribe(() => {
+      // Mettre à jour la liste après validation
+      this.obtenirListeRdv();
+    });
+  }
+
+  // Valider un rendez-vous
+  deposerVoiture(id: string) {
+    this.diagnosticService.deposerVoiture(id).subscribe(() => {
+      // Mettre à jour la liste après validation
+      this.obtenirListeRdv();
+    });
+  }
+
+  
 }

@@ -51,8 +51,8 @@ export class DiagnosticService {
   }
 
   // Déposer une voiture pour diagnostic
-  deposerVoiture(idDiagnostic: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/deposer/${idDiagnostic}`, { headers: this.getHeaders() });
+  deposerVoiture(idrdv: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/deposer/${idrdv}`, { headers: this.getHeaders() });
   }
 
   // Récupérer la liste des diagnostics terminés
