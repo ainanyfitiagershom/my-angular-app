@@ -18,15 +18,22 @@ export class ClientService {
   
         localStorage.setItem('username', response.username); 
         localStorage.setItem('user', JSON.stringify({ _id: response._id })); 
-  
+        
         if (response.role) {
           localStorage.setItem('role', response.role);
         }
   
+        console.log(this.getUserId())
         console.log("🔐 Connexion réussie - Utilisateur stocké :", response);
       })
     );
   }
+
+
+  getUserId(): string {
+    return localStorage.getItem('user') || ''; // Stocké après connexion
+  }
+
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');

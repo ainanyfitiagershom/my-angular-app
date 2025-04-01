@@ -4,8 +4,21 @@
 
     <div class="table-responsive">
       <table mat-table [dataSource]="dataSource1" class="w-100">
+          <!-- Voiture -->
+          <ng-container matColumnDef="client">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+              Client
+            </th>
+            <td mat-cell *matCellDef="let element">
+                  <h6 class="f-s-14 f-w-600">
+                    {{ element.client }}
+                  </h6>
+            </td>
+          </ng-container>
+           <!-- Voiture -->
+
         <!-- Voiture -->
-        <ng-container matColumnDef="assigned">
+        <ng-container matColumnDef="voiture">
           <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
             Voiture
           </th>
@@ -45,6 +58,20 @@
           </td>
         </ng-container>
          <!-- Date de debut -->
+
+          <!-- Probleme -->
+        <ng-container matColumnDef="commentaire">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Commentaire
+          </th>
+          <td mat-cell *matCellDef="let element">        
+            <h6 class=" f-s-16 m-b-4">
+              <span class="text-dark f-w-600">{{ element.commentaire }} </span>
+            </h6>
+            <mat-progress-bar mode="determinate" value="80" color="primary"></mat-progress-bar>
+          </td>
+        </ng-container>
+        <!-- Probleme -->
 
         <!-- Action -->
         <ng-container matColumnDef="action">
