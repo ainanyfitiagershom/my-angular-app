@@ -138,32 +138,5 @@ export class AppFormsComponent {
     );
   }
 
-  country: Food[] = [
-    { value: 'steak-0', viewValue: 'Toyota' },
-    { value: 'pizza-1', viewValue: 'Subaru' },
-    { value: 'tacos-2', viewValue: 'Renault' },
-    { value: 'tacos-3', viewValue: 'Hundai' },
-  ];
-
-  selectedCountry = this.country[2].value;
-
-  city: Food[] = [
-    { value: 'steak-0', viewValue: 'Mexico' },
-    { value: 'pizza-1', viewValue: 'Mumbai' },
-    { value: 'tacos-2', viewValue: 'Tokyo' },
-    { value: 'tacos-3', viewValue: 'New York' },
-  ];
-
-  selectedCity = this.city[1].value;
-
-  state: Food[] = [
-    { value: 'steak-0', viewValue: 'Cuba' },
-    { value: 'pizza-1', viewValue: 'Djibouti' },
-    { value: 'tacos-2', viewValue: 'Bulgaria' },
-    { value: 'tacos-3', viewValue: 'Cabo Verde' },
-  ];
-
-  selectedState = this.state[3].value;
-
   typesOfShoes: string[] = ['Frein', 'Embreage', 'Accélérateur', 'Vitesses', 'Clignotants', 'Essuie-glaces', 'Phare', 'Klaxon', 'Rétroviseur'];
 }

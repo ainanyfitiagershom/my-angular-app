@@ -6,74 +6,22 @@ import { MaterialModule } from 'src/app/material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { ActivatedRoute } from '@angular/router';
+import { DiagnosticService } from 'src/app/services/diagnostic/diagnostic.service';
+import { Router } from '@angular/router';
+import { ReparationService } from 'src/app/services/reparation/reparation.service';
 
-// table 1
-export interface productsData {
-  id: number;
-  voiture: string;
-  date_depot: Date;
-  date_debut: Date;
-  date_fin: Date;
-}
 
-export interface pieceData {
-  id: number;
+
+export interface ReparationData {
+  id: string;
   nom: string;
-  quantite: number;
-  prix_unitaire: number;
+  niveau: string;
+  etat: string;
 }
 
-const PRODUCT_DATA: productsData[] = [
-  {
-    id: 1,
-    voiture: 'Toyota',
-    date_depot: new Date('2025-03-30'),   
-    date_debut: new Date('2025-03-30'),
-    date_fin: new Date('2025-03-30'),  
-  },
-  {
-    id: 2,
-    voiture: 'Renault',
-    date_depot: new Date('2025-03-30'), 
-    date_debut: new Date('2025-03-30'),
-    date_fin: new Date('2025-03-30'),      
-  },
-  {
-    id: 3,
-    voiture: 'Subaru',
-    date_depot: new Date('2025-03-30'), 
-    date_debut: new Date('2025-03-30'),
-    date_fin: new Date('2025-03-30'),  
-  },
-  {
-    id: 4,
-    voiture: 'Mazda',
-    date_depot: new Date('2025-03-30'), 
-    date_debut: new Date('2025-03-30'),
-    date_fin: new Date('2025-03-30'),  
-  },
-];
 
-const PIECE_DATA: pieceData[] = [
-  {
-    id: 1,
-    nom: 'Frein',
-    quantite: 2,
-    prix_unitaire: 200.0,
-  },
-  {
-    id: 2,
-    nom: 'Moteur',
-    quantite: 1,
-    prix_unitaire: 500.0,
-  },
-  {
-    id: 3,
-    nom: 'Pneu',
-    quantite: 4,
-    prix_unitaire: 100.0,
-  },
-];
+
 
 @Component({
   selector: 'app-tables',
@@ -89,11 +37,60 @@ const PIECE_DATA: pieceData[] = [
   templateUrl: './lists_reparation_manager.component.html',
 })
 export class AppListsReparationManagerComponent {
-  // table 1
-  displayedColumns1: string[] = ['assigned', 'date_depot', 'date_debut', 'date_fin','action'];
-  dataSource1 = PRODUCT_DATA;
 
-  // table 2
-  displayedColumns2: string[] = ['nom', 'quantite', 'prix_unitaire','total'];
-  dataSource2 = PIECE_DATA;
-}
+  displayedColumns1: string[] = ['nom', 'niveau', 'etat', 'action'];
+  dataSource1: ReparationData[] = [];
+
+  iddiag: string | null = '';
+
+    constructor(
+        private route: ActivatedRoute,
+        private diagnosticService: DiagnosticService,
+        private reparationService: ReparationService,
+        private router: Router,
+      ) {}
+  
+      ngOnInit(): void {
+        this.iddiag = this.route.snapshot.paramMap.get('id');
+        // Vérification si l'id est null, sinon on peut gérer l'erreur ou rediriger
+        if (this.iddiag) {
+          console.log("ID " + this.iddiag);
+          this.chargerReparation(); // Appeler la fonction pour récupérer les données du diagnostic
+        } else {
+          console.error('ID du diagnostic introuvable dans l\'URL');
+          // Tu peux aussi rediriger vers une autre page si tu veux
+          this.router.navigate(['/404']); // Redirection vers une page d'erreur si l'ID est absent
+        }
+    
+      }
+
+      chargerReparation() {
+        if (!this.iddiag) {
+          console.error(" Aucun ID de réparation trouvé !");
+          return;
+        }
+      
+        this.reparationService.getReparationbydiag(this.iddiag).subscribe(
+          (data) => {
+            if (!data || !data.reparation || !data.reparation.details_reparation) {
+              console.warn(" Aucun détail de réparation disponible !");
+              this.dataSource1 = []; // Évite de laisser undefined
+              return;
+            }
+      
+            this.dataSource1 = data.reparation.details_reparation.map((detail: any) => ({
+              id: detail.id_type_reparation?.id_type_reparation || "Inconnu",
+              nom: detail.id_type_reparation?.nom || "Inconnu",
+              niveau: detail.difficulte?.nom || "Inconnu",
+              etat: detail.etat || "Inconnu",
+            }));
+          },
+          (error) => {
+            console.error(' Erreur lors de la récupération des réparations :', error);
+          }
+        );
+      }
+
+    }
+
+

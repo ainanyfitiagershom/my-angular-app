@@ -35,11 +35,18 @@ export class ReparationService {
     return this.http.delete(`${this.apiUrl}/${idReparation}/details/${idDetail}`, { headers: this.getHeaders() });
   }
 
-  // Assigner un mécanicien à une réparation
+  // Creer reparation 
   assignerMecanicien(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/assigner-mecanicien`, data, { headers: this.getHeaders() });
   }
 
+
+  // Assigner un mécanicien à une réparation
+  creationreparation(idDiagnostic: string ,data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/creation-reparation/${idDiagnostic}`, data, { headers: this.getHeaders() });
+  }
+
+  
   // Valider une réparation
   validerReparation(id: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/valider/${id}`, {}, { headers: this.getHeaders() });
@@ -59,4 +66,32 @@ export class ReparationService {
   validerEtFacturer(id: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/clientvalider/${id}`, {}, { headers: this.getHeaders() });
   }
+
+    // Valider ou annuler un détail de réparation
+    voirdetailReparation(idReparation: string): Observable<any> {
+      return this.http.get(`${this.apiUrl}/voir/${idReparation}`, { headers: this.getHeaders() });
+    }
+
+     // Valider ou annuler un détail de réparation
+     getReparationbydiag(idDiagnostic: string): Observable<any> {
+      return this.http.get(`${this.apiUrl}/bydiag/${idDiagnostic}`, { headers: this.getHeaders() });
+    }
+
+    
+
+    enregistrerDetailReparation(
+      idReparationVoiture: string, 
+      idTypeReparation: string, 
+      idNiveau: string, 
+      pieces: any[]
+    ): Observable<any> {
+      const payload = {
+        idTypeReparation,
+        idNiveau,
+        pieces
+      };
+      return this.http.post(`${this.apiUrl}/ajouter/${idReparationVoiture}`, payload , { headers: this.getHeaders() });
+    }
+
+
 }
