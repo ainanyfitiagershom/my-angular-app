@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DiagnosticService {
-  private apiUrl = 'http://localhost:5001/api/diagnostic';
+  private apiUrl = 'http://localhost:5001/api/diag';
 
   constructor(private http: HttpClient) {}
 

@@ -11,56 +11,22 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material.module';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { ReparationService } from 'src/app/services/reparation/reparation.service';
+import { PieceService } from 'src/app/services/piece/piece.service';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
 
-export interface productsData {
-  id: number;
-  nom: string;
+
+export interface ProductsData {
+  id: any;
+  nom: any;
   nombre: number;
-  prix_unitaire: string;
-  etat: string;
   progress: string;
 }
 
-
-const ELEMENT_DATA: productsData[] = [
-  {
-    id: 1,
-    nom: 'Frein',
-    prix_unitaire: '3.5',
-    nombre: 73,
-    etat: 'Disponible',
-    progress: 'success',
-  },
-  {
-    id: 2,
-    nom: 'Volant',
-    prix_unitaire: '3.5',
-    nombre: 73,
-    etat: 'Non disponible',
-    progress: 'warning',
-  },
-  {
-    id: 3,
-    nom: 'Vitesse',
-    prix_unitaire: '3.5',
-    nombre: 73,
-    etat: 'Non disponible',
-    progress: 'warning',
-  },
-  {
-    id: 4,
-    nom: 'Ampoule',
-    prix_unitaire: '3.5',
-    nombre: 73,
-    etat: 'Non disponible',
-    progress: 'warning',
-  },
-];
+// Données existantes
+const ELEMENT_DATA: ProductsData[] = [];
 
 @Component({
   selector: 'app-forms',
@@ -82,16 +48,100 @@ const ELEMENT_DATA: productsData[] = [
   templateUrl: './ajout_pieces.component.html',
 })
 export class AppAjoutPiecesComponent {
+  
+  idReparationVoiture: string = "";
+  idTypeReparation: string = "";
+  niveauDifficulte: string = "";
+  pieces: any[] = [];
 
-  country: Food[] = [
-    { value: 'steak-0', viewValue: 'Toyota' },
-    { value: 'pizza-1', viewValue: 'Subaru' },
-    { value: 'tacos-2', viewValue: 'Renault' },
-    { value: 'tacos-3', viewValue: 'Hundai' },
-  ];
+  selectedPiece: any = null; // Stockera un objet { _id, nom }  // Stocke la pièce sélectionnée
+  nombre: number = 0; // Stocke la quantité entrée
+  
 
-  selectedCountry = this.country[2].value;
+  displayedColumns: string[] = ['nom', 'nombre'];
+  dataSource = [...ELEMENT_DATA]; // Copie des données
 
-  displayedColumns: string[] = ['assigned', 'nombre', 'etat', 'prix_unitaire'];
-  dataSource = ELEMENT_DATA;
+  constructor(
+      private route: ActivatedRoute,
+      private reparationService: ReparationService,
+      private router: Router,
+      private pieceService: PieceService,
+    ) {
+      
+    }
+    ngOnInit(): void {
+      this.route.queryParams.subscribe(params => {
+        this.idReparationVoiture = params['idReparationVoiture'];
+        this.idTypeReparation = params['idTypeReparation'];
+        this.niveauDifficulte = params['niveauDifficulte'];
+  
+        console.log("ID Réparation Voiture :", this.idReparationVoiture);
+        console.log("ID Type Réparation :", this.idTypeReparation);
+        console.log("Niveau de Difficulté :", this.niveauDifficulte);
+      });
+      this.chargerPieces();
+    }
+
+    chargerPieces() {
+      this.pieceService.obtenirPieces().subscribe({
+        next: (data) => {
+          if (data && Array.isArray(data)) {
+            // Extraire uniquement le nom des catégories
+            this.pieces = data;  // On prend le champ 'nom' de chaque catégorie
+          } else {
+            console.error("Données invalides pour les niveaux", data);
+          }
+        },
+        error: (err) => console.error("Erreur lors du chargement des niveaux", err),
+      });
+    }
+  
+  // Ajouter une pièce à la liste
+  ajouterPiece() {
+    if (!this.selectedPiece || this.nombre <= 0) {
+      console.error('Sélectionnez une pièce et entrez une quantité valide.');
+      return;
+    }
+
+    // Correspondance avec l'interface ProductsData
+    const nouvellePiece: ProductsData = {
+      id: this.selectedPiece._id, 
+      nom: this.selectedPiece.nom, 
+      nombre: this.nombre, // 
+      progress: this.nombre > 0 ? 'success' : 'warning'
+    };
+      
+
+
+    this.dataSource = [...this.dataSource, nouvellePiece]; // Mettre à jour le tableau
+    console.log('Pièce ajoutée :', nouvellePiece);
+
+    // Réinitialiser le formulaire
+    this.selectedPiece = '';
+    this.nombre = 0;
+  }
+
+  // Méthode pour enregistrer les détails de la réparation
+  enregistrerDetail() {
+    if (!this.idTypeReparation || !this.niveauDifficulte) {
+      console.error("Sélectionnez un type de réparation et un niveau !");
+      return;
+    }
+    // Appeler le service pour envoyer les données
+    this.reparationService.enregistrerDetailReparation(
+      this.idReparationVoiture,
+      this.idTypeReparation,
+      this.niveauDifficulte,
+      this.dataSource
+    ).subscribe({
+      next: (response) => {
+        // Rediriger vers la page suivante si nécessaire
+        this.router.navigate(['ui-components/reparations',this.idReparationVoiture]); // Exemple de redirection
+      },
+      error: (err) => {
+        console.error("Erreur lors de l'enregistrement :", err);
+      }
+    });
+  }
+
 }

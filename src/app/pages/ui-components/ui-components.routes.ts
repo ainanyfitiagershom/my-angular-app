@@ -26,6 +26,10 @@ import { AppListsDiagMecanicienComponent } from './lists_diag_mecanicien/lists_d
 import { AppListsDiagManagerComponent } from './lists_diag_manager/lists_diag_manager.componen';
 import { AppListsReparationManagerComponent } from './lists_reparation_manager/lists_reparation_manager.component';
 import { AppDisponibiliteComponent } from './disponibilite/disponibilite.component';
+import { PageDiagnosticComponent } from './diagnostic/faire-diagnostic.component';
+import { AppDetailReparationManagerComponent } from './detail_reparation_manager/detail_reparation_manager.component';
+import { AppDetailReparationClientComponent } from './detail_reparation_client/detail_reparation_client.component';
+
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -96,7 +100,7 @@ export const UiComponentsRoutes: Routes = [
         component: AppAjoutPiecesComponent
       },
       {
-        path: 'reparations',
+        path: 'reparations/:id',
         component: AppReparationMecanicienComponent
       },
       {
@@ -124,13 +128,27 @@ export const UiComponentsRoutes: Routes = [
         component: AppListsDiagManagerComponent
       },
       {
-        path: 'lists_reparation_manager',
+        path: 'lists_reparation_manager/:id',
         component: AppListsReparationManagerComponent
       },
       {
         path: 'disponibilite',
         component: AppDisponibiliteComponent
+      },
+      {
+        path: 'diagnostic/:id', // ou une route similaire
+        component: PageDiagnosticComponent
+      },
+      {
+        path: 'detail_reparation', // ou une route similaire
+        component: AppDetailReparationManagerComponent
+      },
+      {
+        path: 'detail_reparation_client', // ou une route similaire
+        component: AppDetailReparationClientComponent
       }
+      
+
     ],
   },
 ];

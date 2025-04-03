@@ -21,11 +21,17 @@ export class AuthService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     }).pipe(
       tap((response: any) => {
-        localStorage.setItem('token', response.message); 
-        localStorage.setItem('role', response.role); 
+        localStorage.setItem('token', response.token); 
+  
         localStorage.setItem('username', response.username); 
         localStorage.setItem('user', JSON.stringify({ _id: response._id })); 
-        console.log("Utilisateur stocké avec succès :", localStorage.getItem('role'));
+        
+        if (response.role) {
+          localStorage.setItem('role', response.role);
+        }
+  
+        console.log(this.getUserId())
+        console.log("🔐 Connexion réussie - Utilisateur stocké :", response);
       })
     );
   }

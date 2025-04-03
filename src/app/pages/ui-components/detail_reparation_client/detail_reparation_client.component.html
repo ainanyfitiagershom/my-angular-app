@@ -1,0 +1,92 @@
+  <mat-card class="cardWithShadow" *ngIf="reparation">
+    <mat-card-content>
+      <mat-card-title>Détails de la Réparation</mat-card-title>
+      <p><strong>Type de Réparation:</strong> {{ reparation.nomTypeReparation }}</p>
+      <p><strong>Difficulté:</strong> {{ reparation.difficulte }}</p>
+      <p><strong>Prix:</strong> {{ reparation.prix }} Ariary</p>
+      <p><strong>Durée Estimée:</strong> {{ reparation.dureeEstimee }} minutes</p>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card class="cardWithShadow" *ngIf="reparation?.mecaniciens && reparation.mecaniciens.length > 0">
+    <mat-card-content class="m-t-12">
+      <mat-card-title>Mécaniciens Assignés</mat-card-title>
+  
+      <div class="table-responsive">
+        <table mat-table [dataSource]="reparation.mecaniciens" class="w-100">
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Nom</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600">{{ element.nom }}</h6>
+            </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Email</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600">{{ element.email }}</h6>
+            </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="contact">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Contact</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600">{{ element.contact }}</h6>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="['nom', 'email', 'contact']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['nom', 'email', 'contact']"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card class="cardWithShadow" *ngIf="reparation?.piecesUtilisees && reparation.piecesUtilisees.length > 0">
+    <mat-card-content class="m-t-12">
+      <mat-card-title>Liste des Pièces Utilisées</mat-card-title>
+  
+      <div class="table-responsive">
+        <table mat-table [dataSource]="reparation.piecesUtilisees" class="w-100">
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Pièce</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600">{{ element.nom }}</h6>
+            </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="quantite">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Quantité</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600">{{ element.nombre }}</h6>
+            </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="prix_unitaire">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Prix Unitaire</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600">{{ element.prix }} Ar</h6>
+            </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Total</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600 text-info">{{ element.prix * element.nombre }} Ar</h6>
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="['nom', 'quantite', 'prix_unitaire', 'total']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['nom', 'quantite', 'prix_unitaire', 'total']"></tr>
+        </table>
+      </div>
+  
+    </mat-card-content>
+  </mat-card>
+@if(statut == 'Confirmé') {
+    <span>
+    <button mat-flat-button color="primary" class="m-r-12 mat-button-large" (click)="validerDetailClient()">        Valider   Reparation    </button>
+    <button mat-flat-button color="primary" class="m-r-12 mat-button-large" (click)="annulerDetailClient()">        Anuller  Reparation     </button>
+</span>
+}
+  
