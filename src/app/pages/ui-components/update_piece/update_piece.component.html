@@ -1,0 +1,39 @@
+<mat-card class="cardWithShadow">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Modifier niveau</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form (ngSubmit)="mettreAJourPiece()">
+      <div class="row">
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nom de la pièce</mat-label>
+            <input matInput [(ngModel)]="pieceName" name="nom" placeholder="Nom de la pièce" required>
+          </mat-form-field>
+        </div>
+    
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Quantité</mat-label>
+            <input matInput [(ngModel)]="pieceQuantity" name="quantite" type="number" placeholder="Quantité" required>
+          </mat-form-field>
+        </div>
+    
+        <div class="col-lg-4">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Prix unitaire</mat-label>
+            <input matInput [(ngModel)]="piecePrice" name="prix_unitaire" type="number" placeholder="Prix" required>
+          </mat-form-field>
+        </div>
+      </div>
+    
+      <div class="m-t-12">
+        <button mat-flat-button color="primary" type="submit">Mettre à jour</button>
+      </div>
+    </form>
+    
+    
+    
+  </mat-card-content>
+
+</mat-card>

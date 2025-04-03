@@ -35,6 +35,10 @@ import { AppPieceMmComponent } from './piece_mm/piece_mm.component';
 import { AppNiveauComponent } from './niveau/niveau.component';
 import { AppListsClientsComponent } from './lists_clients/lists_clients.component';
 import { AppListsMecaniciensComponent } from './lists_mecaniciens/lists_mecaniciens.component';
+import { AppTypeReparationComponent } from './type_reparation/type_reparation.component';
+import { AppUpdateModelComponent } from './update_model/update_model.component';
+import { AppUpdatePieceComponent } from './update_piece/update_piece.component';
+import { AppUpdateNiveauComponent } from './update_niveau/update_niveau.component';
 
 
 export const UiComponentsRoutes: Routes = [
@@ -176,6 +180,22 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'lists_mecaniciens',
         component: AppListsMecaniciensComponent
+      },
+      {
+        path: 'type_reparation',
+        component: AppTypeReparationComponent
+      },
+      {
+        path: 'update_model/:id',
+        component: AppUpdateModelComponent
+      },
+      {
+        path: 'update_piece/:id',
+        component: AppUpdatePieceComponent
+      },
+      {
+        path: 'update_niveau/:id',
+        component: AppUpdateNiveauComponent
       }
       
     ],

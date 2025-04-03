@@ -18,6 +18,9 @@ export class TypeReparationService {
 
   // Ajouter un nouveau type de réparation
   ajouterTypeReparation(data: any): Observable<any> {
+    if (data.categories && data.categories._id) {
+      data.categories = data.categories._id;
+    }
     return this.http.post(`${this.apiUrl}/`, data, { headers: this.getHeaders() });
   }
 

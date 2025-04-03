@@ -122,4 +122,10 @@ export class AppModelComponent implements OnInit {
       );
     }
   }
+
+
+  goToUpdateModel(id: string): void {
+    this.router.navigate([`/ui-components/update_model/${id}`]); 
+  }
+  
 }

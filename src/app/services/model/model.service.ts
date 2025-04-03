@@ -26,12 +26,20 @@ export class ModelService {
     return this.http.get<any>(this.apiUrl, { headers });
   }
   
+  getModelById(id: string): Observable<any> {
+    const token = localStorage.getItem('token'); 
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); 
+    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers });
+  }
 
   // update un modèle
   updateModel(id: string, model: any): Observable<any> {
     const token = localStorage.getItem('token'); 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); 
-    const url = `${this.apiUrl}/${id}`; 
+    const url = `${this.apiUrl}/${encodeURIComponent(id)}`; 
+
+    console.log("URL de la requête:", url); // Vérifie dans la console
+    console.log("Modèle envoyé:", model); 
     return this.http.put(url, model, { headers });
   }
 

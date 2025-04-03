@@ -37,7 +37,7 @@ export class AppNiveauComponent {
     pourcentage: 0
   };
 
-  constructor(private niveauService: NiveauService) {}
+  constructor(private niveauService: NiveauService, private router:Router) {}
 
   ngOnInit(): void {
     this.getNiveaux();
@@ -87,6 +87,10 @@ export class AppNiveauComponent {
         }
       );
     }
+  }
+
+  goToUpdateNiveau(id: string): void {
+    this.router.navigate([`/ui-components/update_niveau/${id}`]); 
   }
   
 }

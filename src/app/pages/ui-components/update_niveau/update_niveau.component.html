@@ -1,0 +1,33 @@
+<mat-card class="cardWithShadow">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Modifier pieces de voiture</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form (ngSubmit)="mettreAJourNiveau()">
+      <div class="row">
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nom du niveau</mat-label>
+            <input matInput [(ngModel)]="niveauNom" name="nom" placeholder="Nom du niveau" required>
+          </mat-form-field>
+        </div>
+    
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Pourcentage</mat-label>
+            <input matInput [(ngModel)]="niveauPourcentage" name="pourcentage" type="number" placeholder="Pourcentage" required>
+          </mat-form-field>
+        </div>
+      </div>
+    
+      <div class="m-t-12">
+        <button mat-flat-button color="primary" type="submit">Mettre à jour</button>
+      </div>
+    </form>
+    
+    
+    
+    
+  </mat-card-content>
+
+</mat-card>

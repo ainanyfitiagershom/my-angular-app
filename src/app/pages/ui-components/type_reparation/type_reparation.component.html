@@ -1,0 +1,109 @@
+<mat-card class="cardWithShadow">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Ajouter type de reparation</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+   <!-- Formulaire pour ajouter un type de réparation -->
+<form (ngSubmit)="ajouterTypeReparation()">
+  <div class="row">
+    <div class="col-lg-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Nom de la réparation</mat-label>
+        <input matInput [(ngModel)]="nouveauTypeReparation.nom" name="nom" placeholder="Nom de la réparation">
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="nouveauTypeReparation.description" name="description" placeholder="Description" rows="1"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Temps estimé (en minutes)</mat-label>
+        <input matInput [(ngModel)]="nouveauTypeReparation.temps_estime" name="temps_estime" type="number" placeholder="Temps estimé">
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Prix de base</mat-label>
+        <input matInput [(ngModel)]="nouveauTypeReparation.prix_base" name="prix_base" type="number" step="0.01" placeholder="Prix de base">
+      </mat-form-field>
+    </div>
+
+    <div class="col-lg-6">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Catégorie</mat-label>
+        <mat-select [(ngModel)]="nouveauTypeReparation.categories" name="categories">
+          <mat-option *ngFor="let category of categories" [value]="category._id">{{ category.nom }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="m-t-12">
+    <button mat-flat-button color="primary" type="submit">Ajouter</button>
+  </div>
+</form>
+    
+  </mat-card-content>
+
+</mat-card>
+  <mat-card class="cardWithShadow">
+    <mat-card-content class="m-t-12">
+      <mat-card-title>Liste type de reparations</mat-card-title>
+  
+      <div class="table-responsive m-t-16">
+        <table mat-table [dataSource]="typesReparation" class="w-100 mat-elevation-z8">
+          <!-- Colonne Numéro -->
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">#</th>
+            <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+          </ng-container>
+        
+          <!-- Colonne Nom -->
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Nom</th>
+            <td mat-cell *matCellDef="let element">{{ element.nom }}</td>
+          </ng-container>
+        
+          <!-- Colonne Description -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Description</th>
+            <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+          </ng-container>
+        
+          <!-- Colonne Temps estimé -->
+          <ng-container matColumnDef="temps_estime">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Temps estimé</th>
+            <td mat-cell *matCellDef="let element">{{ element.temps_estime }} min</td>
+          </ng-container>
+        
+          <!-- Colonne Prix de base -->
+          <ng-container matColumnDef="prix_base">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Prix de base</th>
+            <td mat-cell *matCellDef="let element">{{ element.prix_base | currency }}</td>
+          </ng-container>
+        
+            <!-- Colonne Actions -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Actions</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="warn" (click)="deleteTypeReparation(element._id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+        
+      </div>
+    </mat-card-content>
+  </mat-card>
