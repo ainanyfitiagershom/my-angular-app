@@ -6,46 +6,22 @@ import { MaterialModule } from 'src/app/material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-
+import { Router } from '@angular/router'
+import { PlanningService } from 'src/app/services/planning/planning.service';
 // table 1
-export interface productsData {
+export interface planning {
   id: number;
-  voiture: string;
+  idReparationVoiture: string;
+  idTypeReparation: string;
   mecanicien: string;
-  observation: string;
-  date_diag: Date;
+  type: string;
+  nom: string;
+  voiture: string;
+  date_debut: string;
+  date_fin: Date;
+  statut: string;
 }
 
-const PRODUCT_DATA: productsData[] = [
-  {
-    id: 1,
-    voiture: 'Toyota',
-    mecanicien: 'koto',
-    observation: 'C est pas trop grave',
-    date_diag: new Date('2025-03-30'),     
-  },
-  {
-    id: 2,
-    voiture: 'Renault',
-    mecanicien: 'koto',
-    observation: 'C est pas trop grave',
-    date_diag: new Date('2025-03-30'),     
-  },
-  {
-    id: 3,
-    voiture: 'Subaru',
-    mecanicien: 'koto',
-    observation: 'C est pas trop grave',
-    date_diag: new Date('2025-03-30'), 
-  },
-  {
-    id: 4,
-    voiture: 'Mazda',
-    mecanicien: 'koto',
-    observation: 'C est pas trop grave',
-    date_diag: new Date('2025-03-30'), 
-  },
-];
 
 @Component({
   selector: 'app-tables',
@@ -60,8 +36,95 @@ const PRODUCT_DATA: productsData[] = [
   ],
   templateUrl: './commencer_diag.component.html',
 })
+
 export class AppCommencerDiagComponent {
   // table 1
-  displayedColumns1: string[] = ['assigned','mecanicien', 'observation', 'date_diag','action'];
-  dataSource1 = PRODUCT_DATA;
+  displayedColumns1: string[] = ['nom','voiture','date_debut','date_fin','action'];
+  dataSource1 : planning[] = [];
+
+  constructor(private planningService: PlanningService
+    ) {}
+  
+    ngOnInit() {
+      this.obtenirPlannings();
+    }
+  
+    obtenirPlannings() {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      if (!user._id) {
+        console.error("⚠️ Aucun utilisateur connecté !");
+        return;
+      }
+      this.planningService.obtenirPlanningsReserveesMecanicien(user._id).subscribe(
+        (data) => {
+          this.dataSource1 = data.map((plan: any) => ({
+            id:plan._id,
+            idReparationVoiture: plan.id_reparation_voiture,
+            idTypeReparation: plan.details.id_type_reparation,
+            mecanicien: plan.mecanicien.nom,
+            type: plan.type_tache,
+            nom: plan.nom,
+            voiture: plan?.voiture?.model?.name || "",
+            date_debut: plan.date_heure_debut,
+            date_fin: plan.date_heure_fin,
+            statut:plan.statut,
+          }));
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération des diagnostics :', error);
+        }
+      );
+    }
+
+ 
+    commencerReparation(element : any) {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      if (!user._id) {
+        console.error("⚠️ Aucun utilisateur connecté !");
+        return;
+      }
+      const data = { 
+          mecanicienId:user._id,
+          idTypeReparation : element.idTypeReparation , 
+          idReparationVoiture : element.idReparationVoiture,
+      }
+  
+      console.log(data);
+      this.planningService.commencerReparation(data).subscribe(
+          (response) => {
+            console.log('Reparation  commencée avec succès !', response);
+            // Rediriger ou effectuer des actions supplémentaires après l'assignation
+            location.reload();
+          },
+          (error) => {
+            console.error('Erreur lors de l\'assignation de la réparation :', error);
+          }
+        );
+    }
+
+    terminerReparation(element : any) {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      if (!user._id) {
+        console.error("⚠️ Aucun utilisateur connecté !");
+        return;
+      }
+      const data = { 
+          mecanicienId:user._id,
+          idTypeReparation : element.idTypeReparation , 
+          idReparationVoiture : element.idReparationVoiture,
+      }
+  
+      console.log(data);
+      this.planningService.terminerReparation(data).subscribe(
+          (response) => {
+            console.log('Reparation  commencée avec succès !', response);
+            // Rediriger ou effectuer des actions supplémentaires après l'assignation
+            location.reload();
+          },
+          (error) => {
+            console.error('Erreur lors de l\'assignation de la réparation :', error);
+          }
+        );
+    }
+
 }

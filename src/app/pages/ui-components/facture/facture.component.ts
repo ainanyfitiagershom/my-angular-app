@@ -4,6 +4,9 @@ import { FactureService } from 'src/app/services/facture/facture.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card'; // Assure-toi aussi que Angular Material est importé
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
 
 
 @Component({
@@ -17,14 +20,17 @@ import { MatCardModule } from '@angular/material/card'; // Assure-toi aussi que 
 export class AppFactureComponent implements OnInit {
   facture: any;
 
-  constructor(private factureService: FactureService) {}
+  constructor(private factureService: FactureService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.getFacture();
+    const idFacture = this.route.snapshot.paramMap.get('id') || "";
+    this.getFacture(idFacture);
   }
 
-  getFacture() {
-    this.factureService.getFacturesDetail('67eedaf89685a1db592b66f0').subscribe(
+  getFacture(id :string) {
+    this.factureService.getFacturesDetail(id).subscribe(
       (data: any) => {
         this.facture = data.facture; // Stocke la facture récupérée
       },
