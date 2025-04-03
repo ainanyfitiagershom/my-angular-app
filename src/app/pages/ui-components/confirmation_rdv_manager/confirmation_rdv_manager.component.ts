@@ -47,10 +47,8 @@ export class AppConfirmationRdvManagerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Récupérer l'ID du RDV depuis l'URL
     this.rdvId = this.route.snapshot.paramMap.get('id') || '';
 
-    // Charger la liste des mécaniciens
     this.rendezVousService.getMecaniciens().subscribe(
       (data) => {
         this.mecaniciens = data;
@@ -62,23 +60,18 @@ export class AppConfirmationRdvManagerComponent implements OnInit {
   }
 
   confirmerRdv() {
-
-    console.log('Date début:', this.dateDebut);
-    console.log('Mécanicien sélectionné:', this.selectedMecanicien);
-
     if (!this.dateDebut || !this.selectedMecanicien) {
       alert('Veuillez sélectionner une date et un mécanicien.');
       return;
     }
 
     const data = {
-      date_heure_rdv: this.dateDebut,
+      date_rendezvous: this.dateDebut,
       mecanicien: this.selectedMecanicien
     };
 
     this.rendezVousService.confirmerRendezVous(this.rdvId, data).subscribe(
       response => {
-        console.log("✅ Rendez-vous confirmé :", response);
         alert('Rendez-vous confirmé avec succès !');
         this.router.navigate(['/ui-components/lists_diag_manager']); // Redirection après confirmation
       },
