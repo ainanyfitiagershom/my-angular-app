@@ -29,6 +29,12 @@ import { AppDisponibiliteComponent } from './disponibilite/disponibilite.compone
 import { PageDiagnosticComponent } from './diagnostic/faire-diagnostic.component';
 import { AppDetailReparationManagerComponent } from './detail_reparation_manager/detail_reparation_manager.component';
 import { AppDetailReparationClientComponent } from './detail_reparation_client/detail_reparation_client.component';
+import { AppMarqueComponent } from './marque/marque.component';
+import { AppModelComponent } from './model/model.component';
+import { AppPieceMmComponent } from './piece_mm/piece_mm.component';
+import { AppNiveauComponent } from './niveau/niveau.component';
+import { AppListsClientsComponent } from './lists_clients/lists_clients.component';
+import { AppListsMecaniciensComponent } from './lists_mecaniciens/lists_mecaniciens.component';
 
 
 export const UiComponentsRoutes: Routes = [
@@ -136,19 +142,42 @@ export const UiComponentsRoutes: Routes = [
         component: AppDisponibiliteComponent
       },
       {
-        path: 'diagnostic/:id', // ou une route similaire
+        path: 'diagnostic/:id', 
         component: PageDiagnosticComponent
       },
       {
-        path: 'detail_reparation', // ou une route similaire
+        path: 'detail_reparation', 
         component: AppDetailReparationManagerComponent
       },
       {
-        path: 'detail_reparation_client', // ou une route similaire
+        path: 'detail_reparation_client', 
         component: AppDetailReparationClientComponent
+      },
+      {
+        path: 'marque',
+        component: AppMarqueComponent
+      },
+      {
+        path: 'model',
+        component: AppModelComponent
+      },
+      {
+        path: 'piece_mm',
+        component: AppPieceMmComponent
+      },
+      {
+        path: 'niveau',
+        component: AppNiveauComponent
+      },
+      {
+        path: 'lists_clients',
+        component: AppListsClientsComponent
+      },
+      {
+        path: 'lists_mecaniciens',
+        component: AppListsMecaniciensComponent
       }
       
-
     ],
   },
 ];

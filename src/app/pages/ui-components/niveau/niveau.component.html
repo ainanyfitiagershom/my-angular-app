@@ -1,0 +1,79 @@
+<mat-card class="cardWithShadow">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Ajouter niveau</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form (ngSubmit)="addNiveau()">
+      <div class="row">
+        <!-- Nom du niveau -->
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nom du niveau</mat-label>
+            <input matInput [(ngModel)]="newNiveau.nom" name="nom" placeholder="Nom du niveau">
+          </mat-form-field>
+        </div>
+    
+        <!-- Pourcentage -->
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Pourcentage</mat-label>
+            <input matInput [(ngModel)]="newNiveau.pourcentage" name="pourcentage" type="number" placeholder="Pourcentage" required>
+          </mat-form-field>
+        </div>
+      </div>
+    
+      <div class="m-t-12">
+        <button mat-flat-button color="primary" type="submit">Ajouter Niveau</button>
+      </div>
+    </form>
+    
+  </mat-card-content>
+
+</mat-card>
+  <mat-card class="cardWithShadow">
+    <mat-card-content class="m-t-12">
+      <mat-card-title>Liste des niveaux</mat-card-title>
+  
+      <div class="table-responsive m-t-16">
+        <table mat-table [dataSource]="niveaux" class="w-100 mat-elevation-z8">
+          <!-- Colonne Numéro -->
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">#</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <h6 class="f-s-14 f-w-600">{{ i + 1 }}</h6>
+            </td>
+          </ng-container>
+        
+          <!-- Colonne Nom -->
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Nom du niveau</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600">{{ element.nom }}</h6>
+            </td>
+          </ng-container>
+        
+          <!-- Colonne Pourcentage -->
+          <ng-container matColumnDef="pourcentage">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Pourcentage</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600">{{ element.pourcentage }}%</h6>
+            </td>
+          </ng-container>
+        
+          <!-- Colonne Actions -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Actions</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="warn" (click)="deleteNiveau(element._id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+      </div>
+    </mat-card-content>
+  </mat-card>

@@ -1,0 +1,93 @@
+<mat-card class="cardWithShadow">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Ajouter nouvelle modeles de voiture</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form (ngSubmit)="addModel()">
+      <div class="row">
+        <!-- Nom du modèle -->
+        <div class="col-lg-4">
+          <mat-label class="f-w-600 m-b-8 d-block">Modèle</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput type="text" placeholder="Nom du modèle" [(ngModel)]="modelName" name="modelName" required />
+          </mat-form-field>
+        </div>
+    
+        <!-- Sélection de la marque -->
+        <div class="col-lg-4">
+          <mat-label class="f-w-600 m-b-8 d-block">Marque</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select [(ngModel)]="selectedMarque" name="marque" required>
+              <mat-option *ngFor="let marque of marques" [value]="marque._id">{{ marque.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+    
+        <!-- Sélection du type de véhicule -->
+        <div class="col-lg-4">
+          <mat-label class="f-w-600 m-b-8 d-block">Type de véhicule</mat-label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select [(ngModel)]="selectedTypeVehicule" name="typeVehicule" required>
+              <mat-option *ngFor="let type of typeVehicules" [value]="type._id">{{ type.name }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    
+      <div class="m-t-12">
+        <button mat-flat-button color="primary" class="m-r-8">Ajouter le modèle</button>
+      </div>
+    </form>
+    
+  </mat-card-content>
+
+</mat-card>
+  <mat-card class="cardWithShadow">
+    <mat-card-content class="m-t-12">
+      <mat-card-title>Liste des modeles</mat-card-title>
+  
+      <div class="table-responsive m-t-16">
+        <table mat-table [dataSource]="models" class="w-100 mat-elevation-z8">
+          <!-- Colonne Numéro -->
+          <ng-container matColumnDef="numero">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">#</th>
+            <td mat-cell *matCellDef="let element; let i = index">
+              <h6 class="f-s-14 f-w-600">{{ i + 1 }}</h6>
+            </td>
+          </ng-container>
+        
+          <!-- Colonne Nom -->
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Nom du modèle</th>
+            <td mat-cell *matCellDef="let element">
+              <h6 class="f-s-14 f-w-600">{{ element.name }}</h6>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="marque">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Marque</th>
+            <td mat-cell *matCellDef="let element">{{ element.marque.name }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="vehicule">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Type de véhicule</th>
+            <td mat-cell *matCellDef="let element">{{ element.typeVehicule.name }}</td>
+          </ng-container>
+        
+          <!-- Colonne Actions -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Actions</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="warn" (click)="deleteModel(element._id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        
+      </div>
+    </mat-card-content>
+  </mat-card>
