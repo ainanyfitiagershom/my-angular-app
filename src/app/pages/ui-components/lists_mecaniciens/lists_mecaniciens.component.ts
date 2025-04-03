@@ -12,6 +12,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; 
 import { NiveauService } from 'src/app/services/niveau/niveau.service';
 import { ClientService } from 'src/app/services/client/client.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RendezVousService } from 'src/app/services/rendezvous/rendezvous.service';
 
 @Component({
   selector: 'app-tables',
@@ -29,40 +32,29 @@ import { ClientService } from 'src/app/services/client/client.service';
   templateUrl: './lists_mecaniciens.component.html',
 })
 export class AppListsMecaniciensComponent {
-  clients: any[] = [];
-  displayedColumns: string[] = ['numero', 'nom', 'email', 'contact', 'adresse', 'type_client', 'createdAt', 'action'];  // Colonnes du tableau
+  mecaniciens: any[] = [];
+  displayedColumns: string[] = ['numero', 'nom', 'email', 'contact', 'adresse', 'salaire_mensuel'];  // Colonnes du tableau
 
-  constructor(private clientService: ClientService) {}
+  constructor(private snackBar: MatSnackBar, private mecanicien: RendezVousService) {}
 
   ngOnInit(): void {
-    this.getClients();
+    this.getMecaniciens();
   }
 
-  // Récupérer tous les clients
-  getClients(): void {
-    this.clientService.getClients().subscribe(
+  // Récupérer les mécaniciens
+  getMecaniciens(): void {
+    this.mecanicien.getMecaniciens().subscribe(
       (data) => {
-        console.log('Clients récupérés :', data);
-        this.clients = data;  // Stocker les clients dans le tableau
+        console.log('Mécaniciens récupérés :', data);
+        this.mecaniciens = data;  // Stocker les mécaniciens dans le tableau
       },
       (error) => {
-        console.error('Erreur lors de la récupération des clients', error);
+        console.error('Erreur lors de la récupération des mécaniciens', error);
+        this.snackBar.open('Erreur lors de la récupération des mécaniciens', '', {
+          duration: 2000,
+        });
       }
     );
   }
 
-  supprimerClient(id: string): void {
-    if (confirm('Voulez-vous vraiment supprimer cette marque ?')) {
-      this.clientService.deleteClient(id).subscribe(
-        () => {
-          alert('✅ Client supprimée avec succès !');
-          this.getClients(); // Recharger la liste après suppression
-        },
-        (error) => {
-          console.error('❌ Erreur lors de la suppression :', error);
-        }
-      );
-    }
-  }
-  
 }

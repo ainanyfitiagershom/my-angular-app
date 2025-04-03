@@ -209,6 +209,15 @@ export function getNavItems(role: string): NavItem[] {
     route: '/ui-components/niveau',
   },
   {
+    displayName: 'Type de reparation',
+    iconName: 'solar:password-minimalistic-input-line-duotone',
+    route: '/ui-components/type_reparation',
+  },
+  {
+    navCap: 'Utilisateurs',
+    divider: true
+  },
+  {
     displayName: 'Gestion des clients',
     iconName: 'solar:layers-minimalistic-line-duotone',
     route: '/ui-components/lists_clients',

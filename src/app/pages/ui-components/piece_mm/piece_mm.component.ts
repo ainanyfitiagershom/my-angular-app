@@ -37,7 +37,7 @@ export class AppPieceMmComponent {
   displayedColumns: string[] = ['numero', 'nom', 'quantite', 'prix_unitaire', 'action'];  // Colonnes du tableau
 
 
-  constructor(private pieceService: PieceService) {}
+  constructor(private pieceService: PieceService, private router: Router) {}
 
   ngOnInit(): void {
     this.getPieces();
@@ -86,6 +86,10 @@ export class AppPieceMmComponent {
         }
       );
     }
+  }
+  
+  goToUpdatePiece(id: string): void {
+    this.router.navigate([`/ui-components/update_piece/${id}`]); // ✅ Bonne interpolation !
   }
   
 }
