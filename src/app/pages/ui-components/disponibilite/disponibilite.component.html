@@ -1,49 +1,95 @@
-<mat-card class="cardWithShadow theme-card">
-  <mat-card-header>
-    <mat-card-title class="m-b-0">Tableau de disponibilité</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="b-t-1">
-    <form>
-      <div class="row">    
-        <!-- select -->
-        <div class="col-lg-6">
-          <mat-label class="f-w-600 m-b-8 d-block">Mois</mat-label>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-select [(value)]="selectedMonth">
-              @for(option of mois; track option.value) {
-              <mat-option [value]="option.value">{{
-                option.viewValue
-                }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <!-- select -->
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <mat-card-title>Commencer les reparations</mat-card-title>
 
-        <!-- select -->
-        <div class="col-lg-6">
-          <mat-label class="f-w-600 m-b-8 d-block">Jours</mat-label>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-select [(value)]="selectedDay">
-              @for(option of jour; track option.value) {
-              <mat-option [value]="option.value">{{
-                option.viewValue
-                }}</mat-option>
-              }
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <!-- select -->
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource1" class="w-100">
+        <!-- Voiture -->
+        <ng-container matColumnDef="mecanicien">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Mecanicien
+          </th>
+          <td mat-cell *matCellDef="let element">
+                <h6 class="f-s-14 f-w-600">
+                  {{ element.mecanicien }}
+                </h6>
+          </td>
+        </ng-container>
+         <!-- Voiture -->
+
+          <!-- Voiture -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Type
+          </th>
+          <td mat-cell *matCellDef="let element">
+                <h6 class="f-s-14 f-w-600">
+                  {{ element.type }}
+                </h6>
+          </td>
+        </ng-container>
+         <!-- Voiture -->
+
+        <!-- observation -->
+        <ng-container matColumnDef="client">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+              Client
+          </th>
+          <td mat-cell *matCellDef="let element">        
+            <h6 class="f-s-14 f-w-600">
+              <span class="text-dark f-w-600">{{ element.client }} </span>
+            </h6>
+          </td>
+        </ng-container>
+        <!-- observation -->
+
+          <!-- observation -->
+        <ng-container matColumnDef="voiture">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+              Voiture
+          </th>
+          <td mat-cell *matCellDef="let element">        
+            <h6 class="f-s-14 f-w-600">
+              <span class="text-dark f-w-600">{{ element.voiture }} </span>
+            </h6>
+          </td>
+        </ng-container>
+        <!-- observation -->
+  
+        <!-- Date de debut -->
+        <ng-container matColumnDef="date_debut">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Date Debut</th>
+          <td mat-cell *matCellDef="let element" class="p-l-0">
+            <div class="d-flex align-items-center">
+              <div class="m-l-16">
+                <h6 class="f-s-14 f-w-600">
+                  {{ element.date_debut | date: 'fullDate' }}
+                </h6>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+         <!-- Date de debut -->
+
+          <!-- Date de debut -->
+        <ng-container matColumnDef="date_fin">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Date Fin</th>
+          <td mat-cell *matCellDef="let element" class="p-l-0">
+            <div class="d-flex align-items-center">
+              <div class="m-l-16">
+                <h6 class="f-s-14 f-w-600">
+                  {{ element.date_fin | date: 'fullDate' }}
+                </h6>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+         <!-- Date de debut -->
 
 
-
-      </div>
-
-      <div class="m-t-12">
-        <button mat-flat-button color="primary" class="m-r-8">Valider</button>
-        <button mat-stroked-button color="warn">Annuler</button>
-      </div>
-    </form>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+      </table>
+    </div>
   </mat-card-content>
 </mat-card>
-
