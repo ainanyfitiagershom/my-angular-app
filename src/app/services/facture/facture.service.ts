@@ -44,4 +44,10 @@ export class FactureService {
   getFacturesByClient(idClient: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/client/${idClient}`, { headers: this.getHeaders() });
   }
+
+    // Récupérer les factures d'un client spécifique
+  getFacturesDetail(idFacture: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/detail/${idFacture}`, { headers: this.getHeaders() });
+  }
+  
 }

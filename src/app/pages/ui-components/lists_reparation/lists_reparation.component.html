@@ -1,164 +1,83 @@
 <mat-card class="cardWithShadow">
-    <mat-card-content>
-      <mat-card-title>Liste de votre Reparations</mat-card-title>
+  <mat-card-content>
+    <mat-card-title>Liste de tous les Reparations</mat-card-title>
+
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource1" class="w-100">
+        <!-- Voiture -->
+        <ng-container matColumnDef="nom">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Nom 
+          </th>
+          <td mat-cell *matCellDef="let element">
+                <h6 class="f-s-14 f-w-600">
+                  {{ element.nom }}
+                </h6>
+          </td>
+        </ng-container>
+         <!-- Voiture -->
   
-      <div class="table-responsive">
-        <table mat-table [dataSource]="dataSource1" class="w-100">
-          <!-- Voiture -->
-          <ng-container matColumnDef="assigned">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
-              Voiture
-            </th>
-            <td mat-cell *matCellDef="let element">
-                  <h6 class="f-s-14 f-w-600">
-                    {{ element.voiture }}
-                  </h6>
-            </td>
-          </ng-container>
-           <!-- Voiture -->
-    
-          <!-- Date de debut -->
-          <ng-container matColumnDef="date_depot">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Date de depot</th>
-            <td mat-cell *matCellDef="let element" class="p-l-0">
-              <div class="d-flex align-items-center">
-                <div class="m-l-16">
-                  <h6 class="f-s-14 f-w-600 text-info">
-                    {{ element.date_depot | date: 'fullDate' }}
-                  </h6>
-                </div>
+        <!-- Date de debut -->
+        <ng-container matColumnDef="niveau">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Niveau</th>
+          <td mat-cell *matCellDef="let element" class="p-l-0">
+            <div class="d-flex align-items-center">
+              <div class="m-l-16">
+                <h6 class="f-s-14 f-w-600 text-info">
+                  {{ element.niveau }}
+                </h6>
               </div>
-            </td>
-          </ng-container>
-           <!-- Date de debut -->
+            </div>
+          </td>
+        </ng-container>
+         <!-- Date de debut -->
 
-           <!-- Date de debut -->
-          <ng-container matColumnDef="date_debut">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Date de debut</th>
-            <td mat-cell *matCellDef="let element" class="p-l-0">
-              <div class="d-flex align-items-center">
-                <div class="m-l-16">
-                  <h6 class="f-s-14 f-w-600 text-warning">
-                    {{ element.date_debut | date: 'fullDate' }}
-                  </h6>
-                </div>
+         <!-- Date de debut -->
+        <ng-container matColumnDef="etat">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Etat</th>
+          <td mat-cell *matCellDef="let element" class="p-l-0">
+            <div class="d-flex align-items-center">
+              <div class="m-l-16">
+                <h6 class="f-s-14 f-w-600 text-warning">
+                  {{ element.etat }}
+                </h6>
               </div>
-            </td>
-          </ng-container>
-           <!-- Date de debut -->
+            </div>
+          </td>
+        </ng-container>
+         <!-- Date de debut -->
 
-           <!-- Date de debut -->
-          <ng-container matColumnDef="date_fin">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Date de finition</th>
-            <td mat-cell *matCellDef="let element" class="p-l-0">
-              <div class="d-flex align-items-center">
-                <div class="m-l-16">
-                  <h6 class="f-s-14 f-w-600 text-success">
-                    {{ element.date_fin | date: 'fullDate' }}
-                  </h6>
-                </div>
-              </div>
-            </td>
-          </ng-container>
-           <!-- Date de debut -->
 
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Actions</th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-menu-item>
-                  <span class="bg-light-error text-error rounded f-w-600 p-6 p-y-4 f-s-12">Supprimer</span>
-                </button>          
-            </td>
-          </ng-container>
-  
-          <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
-        </table>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Actions</th>
+        <td mat-cell *matCellDef="let element">
+
+
+            <!-- Bouton pour état "Terminé" ou "Confirmé" -->
+            <ng-container>
+                <button mat-menu-item (click)="voirDetailReparation($event, element.id)">
+                    <span class="bg-light-info text-info rounded f-w-600 p-6 p-y-4 f-s-12">
+                        Voir Détails
+                    </span>
+                    <mat-icon>visibility</mat-icon>
+                </button>
+            </ng-container>
+
+        </td>
+      </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+      </table>
+    </div>
+    @if(statut == 'Confirmé') {
+      <div class="d-flex justify-content-end">
+        <button mat-flat-button color="primary" class="m-r-12 mat-button-large" (click)="validerClientReparation()">     Valider  Reparation et Generer Facture   </button>
       </div>
-    </mat-card-content>
+    }
+  
+
+  </mat-card-content>
 </mat-card>
-  <mat-card class="cardWithShadow">
-    <mat-card-content class="m-t-12">
-      <mat-card-title>Liste des pieces</mat-card-title>
-  
-      <div class="table-responsive">
-        <table mat-table [dataSource]="dataSource2" class="w-100">
-          <!-- Voiture -->
-          <ng-container matColumnDef="nom">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
-              Pièce
-            </th>
-            <td mat-cell *matCellDef="let element">
-                  <h6 class="f-s-14 f-w-600">
-                    {{ element.nom }}
-                  </h6>
-            </td>
-          </ng-container>
-           <!-- Voiture -->
-    
-          <!-- Date de debut -->
-          <ng-container matColumnDef="quantite">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Quantité</th>
-            <td mat-cell *matCellDef="let element" class="p-l-0">
-              <div class="d-flex align-items-center">
-                <div class="m-l-16">
-                  <h6 class="f-s-14 f-w-600">
-                    {{ element.quantite }}
-                  </h6>
-                </div>
-              </div>
-            </td>
-          </ng-container>
-           <!-- Date de debut -->
-
-           <!-- Date de debut -->
-          <ng-container matColumnDef="prix_unitaire">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Prix unitaire</th>
-            <td mat-cell *matCellDef="let element" class="p-l-0">
-              <div class="d-flex align-items-center">
-                <div class="m-l-16">
-                  <h6 class="f-s-14 f-w-600">
-                    {{ element.prix_unitaire }}
-                  </h6>
-                </div>
-              </div>
-            </td>
-          </ng-container>
-           <!-- Date de debut -->
-
-           <!-- Date de debut -->
-          <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Prix total</th>
-            <td mat-cell *matCellDef="let element" class="p-l-0">
-              <div class="d-flex align-items-center">
-                <div class="m-l-16">
-                  <h6 class="f-s-14 f-w-600 text-info">
-                    {{ element.prix_unitaire * element.quantite }}
-                  </h6>
-                </div>
-              </div>
-            </td>
-          </ng-container>
-           <!-- Date de debut -->
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">Actions</th>
-            <td mat-cell *matCellDef="let element">
-                <button mat-menu-item>
-                  <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">Acheter</span>
-                </button>          
-            </td>
-          </ng-container>
-  
-          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns2"></tr>
-
-        </table>
-        <div class="d-flex justify-content-end">
-          <button mat-flat-button color="primary" class="m-r-8">Valider</button>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>

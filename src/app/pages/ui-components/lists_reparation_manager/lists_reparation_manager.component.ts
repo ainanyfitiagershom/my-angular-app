@@ -132,8 +132,7 @@ export class AppListsReparationManagerComponent {
               console.error('Sélectionnez un type de réparation  avant!');
               return;
             }
-          
-            this.router.navigate(['ui-components/detail_reparation_client'], {
+            this.router.navigate(['ui-components/detail_reparation'], {
               queryParams: {
                 idReparationVoiture: this.idReparationVoiture,
                 idTypeReparation: this.idTypeReparation,
