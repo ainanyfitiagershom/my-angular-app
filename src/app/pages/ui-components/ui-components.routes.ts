@@ -27,6 +27,9 @@ import { AppListsDiagManagerComponent } from './lists_diag_manager/lists_diag_ma
 import { AppListsReparationManagerComponent } from './lists_reparation_manager/lists_reparation_manager.component';
 import { AppDisponibiliteComponent } from './disponibilite/disponibilite.component';
 import { PageDiagnosticComponent } from './diagnostic/faire-diagnostic.component';
+import { AppDetailReparationManagerComponent } from './detail_reparation_manager/detail_reparation_manager.component';
+import { AppDetailReparationClientComponent } from './detail_reparation_client/detail_reparation_client.component';
+
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -135,7 +138,16 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'diagnostic/:id', // ou une route similaire
         component: PageDiagnosticComponent
+      },
+      {
+        path: 'detail_reparation', // ou une route similaire
+        component: AppDetailReparationManagerComponent
+      },
+      {
+        path: 'detail_reparation_client', // ou une route similaire
+        component: AppDetailReparationClientComponent
       }
+      
 
     ],
   },

@@ -35,6 +35,14 @@ export class ReparationService {
     return this.http.delete(`${this.apiUrl}/${idReparation}/details/${idDetail}`, { headers: this.getHeaders() });
   }
 
+
+  
+  // Valider ou annuler un détail de réparation
+  voirDetailTypeReparation(idReparation: string, idTypeReparation: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/detail/${idReparation}/${idTypeReparation}`, { headers: this.getHeaders() });
+  }
+
+
   // Creer reparation 
   assignerMecanicien(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/assigner-mecanicien`, data, { headers: this.getHeaders() });
@@ -46,15 +54,20 @@ export class ReparationService {
     return this.http.post(`${this.apiUrl}/creation-reparation/${idDiagnostic}`, data, { headers: this.getHeaders() });
   }
 
+    // Valider ou annuler un détail de réparation
+  validerDetailManager(idReparation: string, idTypeReparation: string): Observable<any> {
+      return this.http.put(`${this.apiUrl}/valider/${idReparation}/${idTypeReparation}`, {}, { headers: this.getHeaders() });
+  }
+
   
   // Valider une réparation
   validerReparation(id: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/valider/${id}`, {}, { headers: this.getHeaders() });
+    return this.http.get(`${this.apiUrl}/valider/${id}`, { headers: this.getHeaders() });
   }
 
   // Valider ou annuler un détail de réparation
-  validerOuAnnulerDetail(idReparation: string, idTypeReparation: string, action: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${idReparation}/${idTypeReparation}/action/${action}`, {}, { headers: this.getHeaders() });
+  validerOuAnnulerDetail(idClient: string,idReparation: string, idTypeReparation: string, action: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${idClient}/${idReparation}/${idTypeReparation}/action/${action}`, {}, { headers: this.getHeaders() });
   }
 
   // Choisir si une pièce est prise ou non

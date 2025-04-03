@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RoleService {
-  private apiUrl = 'http://localhost:5001/api/role/roles';
+  private apiUrl = 'http://localhost:5001/api/role';
 
   constructor(private http: HttpClient) {}
 
@@ -17,6 +17,13 @@ export class RoleService {
 
   // Obtenir la liste des rôles
   getRoles(): Observable<any> {
-    return this.http.get(this.apiUrl, { headers: this.getHeaders() });
+    return this.http.get(`${this.apiUrl}/roles`, { headers: this.getHeaders() });
   }
+
+  // Obtenir la liste des rôles
+  getMecaniciens(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getMecaniciens`, { headers: this.getHeaders() });
+  }
+
+  
 }

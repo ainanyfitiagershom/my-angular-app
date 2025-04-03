@@ -72,6 +72,14 @@
           <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
             {{ element.etat | titlecase }}
           </span>
+          }@if(element.etat == 'Validé') {
+          <span class="bg-light-success text-success rounded f-w-600 p-6 p-y-4 f-s-12">
+              {{ element.etat | titlecase }}
+          </span>
+          }@if(element.etat == 'Confirmé') {
+          <span class="bg-light-warning text-warning rounded f-w-600 p-6 p-y-4 f-s-12">
+            {{ element.etat | titlecase }}
+          </span>
           }
         </td>
       </ng-container>

@@ -174,24 +174,8 @@ dataSource1: ReparationData[] = [];
     }
   
   
-  country: Option[] = [
-    { value: 'toyota', viewValue: 'Toyota' },
-    { value: 'subaru', viewValue: 'Subaru' },
-    { value: 'renault', viewValue: 'Renault' },
-    { value: 'hyundai', viewValue: 'Hyundai' },
-  ];
 
-  selectedCountry = this.country[2].value;
 
-  niveau: Option[] = [
-    { value: 'niveau-1', viewValue: 'Niveau 1' },
-    { value: 'niveau-2', viewValue: 'Niveau 2' },
-    { value: 'niveau-3', viewValue: 'Niveau 3' },
-    { value: 'niveau-4', viewValue: 'Niveau 4' },
-  ];
-
-  selectedValue = this.niveau[1].value;
-  
 
 
 }

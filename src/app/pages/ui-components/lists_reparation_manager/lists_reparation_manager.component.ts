@@ -43,6 +43,10 @@ export class AppListsReparationManagerComponent {
 
   iddiag: string | null = '';
 
+  idReparationVoiture: string | null = '';
+  idTypeReparation: string = ''; // Id de type de réparation à assigner
+
+  statut : string = '';
     constructor(
         private route: ActivatedRoute,
         private diagnosticService: DiagnosticService,
@@ -77,9 +81,10 @@ export class AppListsReparationManagerComponent {
               this.dataSource1 = []; // Évite de laisser undefined
               return;
             }
-      
+            this.idReparationVoiture = data.reparation._id;
+            this.statut = data.reparation.etat;
             this.dataSource1 = data.reparation.details_reparation.map((detail: any) => ({
-              id: detail.id_type_reparation?.id_type_reparation || "Inconnu",
+              id: detail?._id || "Inconnu",
               nom: detail.id_type_reparation?.nom || "Inconnu",
               niveau: detail.difficulte?.nom || "Inconnu",
               etat: detail.etat || "Inconnu",
@@ -91,6 +96,95 @@ export class AppListsReparationManagerComponent {
         );
       }
 
-    }
+      
+
+      assinerMecanicienReparation(event: Event ,id: string ) {
+            event.preventDefault(); // Empêche le rechargement de la page
+            this.idTypeReparation = id;
+            console.log('Valeurs avant navigation :', {
+              idReparationVoiture: this.idReparationVoiture,
+              idTypeReparation:  this.idTypeReparation
+            });
+          
+            if (!this.idReparationVoiture || !this.idTypeReparation) {
+              console.error('Sélectionnez un type de réparation  avant!');
+              return;
+            }
+          
+            this.router.navigate(['ui-components/detail_reparation'], {
+              queryParams: {
+                idReparationVoiture: this.idReparationVoiture,
+                idTypeReparation: this.idTypeReparation,
+              }
+            });
+          }
+
+
+          voirDetailReparation(event: Event ,id: string ) {
+            event.preventDefault(); // Empêche le rechargement de la page
+            this.idTypeReparation = id;
+            console.log('Valeurs avant navigation :', {
+              idReparationVoiture: this.idReparationVoiture,
+              idTypeReparation:  this.idTypeReparation
+            });
+          
+            if (!this.idReparationVoiture || !this.idTypeReparation) {
+              console.error('Sélectionnez un type de réparation  avant!');
+              return;
+            }
+          
+            this.router.navigate(['ui-components/detail_reparation_client'], {
+              queryParams: {
+                idReparationVoiture: this.idReparationVoiture,
+                idTypeReparation: this.idTypeReparation,
+              }
+            });
+          }
+
+
+          
+
+          
+        
+    validerReparation() {
+        if (!this.idReparationVoiture) {
+          console.error('Sélectionnez des valeurs valides .');
+          return;
+        }
+        this.reparationService.validerReparation(this.idReparationVoiture).subscribe(
+            (response) => {
+              console.log('Réparation validée avec succès !', response);
+              location.reload(); // Cela recharge la page entière
+              // Rediriger ou effectuer des actions supplémentaires après l'assignation
+              ///this.router.navigate(['ui-components/lists_reparation_manager',response.data.idDiagnostic]); // Exemple de redirection
+            },
+            (error) => {
+              console.error('Erreur lors de l\'assignation de la réparation :', error);
+            }
+          );
+      }
+
+
+      validerClientReparation() {
+        if (!this.idReparationVoiture) {
+          console.error('Sélectionnez des valeurs valides .');
+          return;
+        }
+        this.reparationService.validerEtFacturer(this.idReparationVoiture).subscribe(
+            (response) => {
+              console.log('Réparation validée avec succès ! et Facturee', response);
+              //location.reload(); // Cela recharge la page entière
+              // Rediriger ou effectuer des actions supplémentaires après l'assignation
+              ///this.router.navigate(['ui-components/lists_reparation_manager',response.data.idDiagnostic]); // Exemple de redirection
+            },
+            (error) => {
+              console.error('Erreur lors de l\'assignation de la réparation :', error);
+            }
+          );
+      }
+
+
+      
+  }
 
 
