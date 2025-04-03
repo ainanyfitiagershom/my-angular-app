@@ -68,11 +68,11 @@ export const UiComponentsRoutes: Routes = [
         component: AppListsDiagComponent,
       },
       {
-        path: 'lists_reparation',
+        path: 'lists_reparation/:id',
         component: AppListsReparationComponent
       },
       {
-        path: 'facture',
+        path: 'facture/:id',
         component: AppFactureComponent
       },
       {

@@ -1,6 +1,7 @@
+@if(statut == 'En attente') {
 <mat-card class="cardWithShadow theme-card">
   <mat-card-header>
-    <mat-card-title class="m-b-0">Ajouter des pièces pour le reparation</mat-card-title>
+    <mat-card-title class="m-b-0">Ajouter Mecanicien  pour le reparation</mat-card-title>
   </mat-card-header>
     <mat-card-content class="b-t-1">
       <form (ngSubmit)="ajouterMecanicien()">
@@ -40,6 +41,7 @@
       </form>
     </mat-card-content>
 </mat-card>
+}
 
 <mat-card class="cardWithShadow" *ngIf="reparation">
   <mat-card-content>

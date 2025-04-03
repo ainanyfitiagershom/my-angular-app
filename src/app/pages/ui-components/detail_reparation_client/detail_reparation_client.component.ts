@@ -27,9 +27,11 @@ export interface Mecanicien {
 }
 
 export interface PieceUtilisee {
+  _id: string;
   nom: string;
   quantite: number;
   prix_unitaire: number;
+  etat: string;
 }
 
 export interface Reparation {
@@ -91,7 +93,7 @@ export class AppDetailReparationClientComponent {
 
 
   displayedColumnsMecaniciens: string[] = ['nom', 'email', 'contact'];
-  displayedColumnsPieces: string[] = ['nom', 'quantite', 'prix_unitaire', 'total'];
+  displayedColumnsPieces: string[] = ['nom', 'quantite', 'prix_unitaire','total','etat','action'];
 
 
     constructor(
@@ -189,7 +191,56 @@ export class AppDetailReparationClientComponent {
       );
   }
 
-  
+
+  acheterPiece(element : any) {
+    if (!this.idReparationVoiture || this.idTypeReparation === null ) {
+      console.error('Sélectionner des valeurs valides .');
+      return;
+    }
+    const data = { 
+        idTypeReparation : this.idTypeReparation , 
+        idPiece : element.piece._id, 
+        prise : true, 
+        nombre : element.nombre,
+    }
+
+    console.log(data);
+    this.reparationService.choisirPiece(this.idReparationVoiture,data).subscribe(
+        (response) => {
+          console.log('Piece achetée avec succès !', response);
+          // Rediriger ou effectuer des actions supplémentaires après l'assignation
+          location.reload();
+        },
+        (error) => {
+          console.error('Erreur lors de l\'assignation de la réparation :', error);
+        }
+      );
+  }
+
+  nePasAcheterPiece(element : any) {
+    if (!this.idReparationVoiture || this.idTypeReparation === null ) {
+      console.error('Sélectionner des valeurs valides .');
+      return;
+    }
+    const data = { 
+        idTypeReparation : this.idTypeReparation , 
+        idPiece : element.piece._id, 
+        prise : false, 
+        nombre : element.nombre,
+    }
+
+    this.reparationService.choisirPiece(this.idReparationVoiture,data).subscribe(
+        (response) => {
+          console.log('Piece achetée avec succès !', response);
+          // Rediriger ou effectuer des actions supplémentaires après l'assignation
+          location.reload();
+        },
+        (error) => {
+          console.error('Erreur lors de l\'assignation de la réparation :', error);
+        }
+      );
+  }
+
   
 
 }

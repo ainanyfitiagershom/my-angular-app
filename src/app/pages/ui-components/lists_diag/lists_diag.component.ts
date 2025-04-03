@@ -71,7 +71,7 @@ export class AppListsDiagComponent implements OnInit {
   }
 
   voirreparation(id: string) {
-    this.router.navigate(['ui-components/lists_reparation_manager', id]); // Redirige vers la page /diagnostic/{id}
+    this.router.navigate(['ui-components/lists_reparation', id]); // Redirige vers la page /diagnostic/{id}
   }
 
 
