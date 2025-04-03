@@ -120,7 +120,7 @@ export const UiComponentsRoutes: Routes = [
         component: AppListsRdvManagerComponent
       },
       {
-        path: 'confirmation_rdv_manager',
+        path: 'confirmation_rdv_manager/:id',
         component: AppConfirmationRdvManagerComponent
       },
       {

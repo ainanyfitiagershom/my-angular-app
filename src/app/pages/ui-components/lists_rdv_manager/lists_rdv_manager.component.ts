@@ -6,7 +6,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { RendezVousService } from '../../../services/rendezvous/rendezvous.service';
@@ -40,8 +40,8 @@ export class AppListsRdvManagerComponent implements OnInit {
   dataSource1: RdvData[] = [];
 
   constructor(
-      private rendezVousService: RendezVousService 
-      
+      private rendezVousService: RendezVousService, 
+      private router: Router
     ) {}
 
   ngOnInit() {
@@ -66,5 +66,21 @@ export class AppListsRdvManagerComponent implements OnInit {
     );
   }
 
- 
+  redirigerVersConfirmation(id: string) {
+    this.router.navigate(['/ui-components/confirmation_rdv_manager', id]);
+  }
+
+  confirmerRdv(rdvId: string) {
+    this.rendezVousService.confirmerRendezVous(rdvId, { statut: 'confirmé' }).subscribe(
+      response => {
+        console.log("✅ Rendez-vous confirmé :", response);
+        alert('Rendez-vous confirmé avec succès !');
+        this.obtenirListeRdv(); // Actualiser la liste après confirmation
+      },
+      error => {
+        console.error("❌ Erreur lors de la confirmation :", error);
+      }
+    );
+  }
+  
 }
