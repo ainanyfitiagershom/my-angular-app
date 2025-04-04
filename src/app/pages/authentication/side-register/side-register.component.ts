@@ -18,24 +18,16 @@ import { RoleService } from 'src/app/services/role/role.service';
 export class AppSideRegisterComponent {
   options = this.settings.getOptions();
 
-  username: string = '';
+  nom: string = '';
   email: string = '';
-  password: string = '';
-  tel: string = '';
+  mdp: string = '';
+  contact: string = '';
   roleName: string = '';  // Valeur par défaut vide
   roles: any[] = [];  // Liste des rôles récupérée depuis le backend
+  salaire_mensuel: number = 0;
+
 
   constructor(private settings: CoreService, private router: Router, private authService: AuthService, private roleService: RoleService) {}
-
-  form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    email: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-  });
-
-  get f() {
-    return this.form.controls;
-  }
 
   ngOnInit(): void {
     this.roleService.getRoles().subscribe(
@@ -56,8 +48,8 @@ export class AppSideRegisterComponent {
   onSubmit(): void {
     const token = localStorage.getItem('token') ?? undefined;  // Si token est null, utiliser undefined
   
-    this.authService.registerUser(this.username, this.email, this.password, this.tel, this.roleName, token)
-      .subscribe(
+    this.authService.registerUser(this.nom, this.email, this.mdp, this.contact, this.roleName, this.salaire_mensuel, token)
+    .subscribe(
         response => {
           console.log('Utilisateur créé avec succès !', response);
           // Redirection ou message de confirmation ici

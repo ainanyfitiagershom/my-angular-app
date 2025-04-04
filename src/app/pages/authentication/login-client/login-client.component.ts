@@ -6,13 +6,17 @@ import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientService } from 'src/app/services/client/client.service';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-login-client',
-  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [RouterModule, MaterialModule, FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './login-client.component.html',
 })
 export class AppLoginClientComponent {
+
+  token: string | null = null;
 
   constructor(private clientService: ClientService, private router: Router) {}
 
@@ -23,6 +27,10 @@ export class AppLoginClientComponent {
 
   get f() {
     return this.form.controls;
+  }
+
+  ngOnInit(): void {
+    this.token = localStorage.getItem('token');
   }
 
   submit() {
