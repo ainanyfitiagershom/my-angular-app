@@ -181,7 +181,7 @@ export function getNavItems(role: string): NavItem[] {
   },
   {
     displayName: 'Liste reparation / pieces',
-    iconName: 'solar:settings-line-duotone',
+    iconName: 'solar:pie-chart-2-line-duotone',
     route: '/ui-components/lists_reparation_manager',
   },
   {
@@ -195,7 +195,7 @@ export function getNavItems(role: string): NavItem[] {
   },
   {
     displayName: 'Model de voiture',
-    iconName: 'solar:chart-2-line-duotone',
+    iconName: 'solar:widget-add-line-duotone',
     route: '/ui-components/model',
   },
   {
@@ -219,12 +219,12 @@ export function getNavItems(role: string): NavItem[] {
   },
   {
     displayName: 'Gestion des clients',
-    iconName: 'solar:layers-minimalistic-line-duotone',
+    iconName: 'solar:user-id-line-duotone',
     route: '/ui-components/lists_clients',
   },
   {
     displayName: 'Liste mecaniciens',
-    iconName: 'solar:settings-line-duotone',
+    iconName: 'solar:user-plus-rounded-line-duotone',
     route: '/ui-components/lists_mecaniciens',
   },
 ] ;

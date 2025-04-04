@@ -1,0 +1,62 @@
+<mat-card class="cardWithShadow">
+  <mat-card-header>
+    <mat-card-title class="m-b-0">Modifier type de reparation</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="b-t-1">
+    <form (ngSubmit)="mettreAJourTypeReparation()">
+      <div class="row">
+        <!-- Nom de la réparation -->
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Nom de la réparation</mat-label>
+            <input matInput [(ngModel)]="typeReparationNom" name="nom" placeholder="Nom de la réparation" required>
+          </mat-form-field>
+        </div>
+    
+        <!-- Description -->
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Description</mat-label>
+            <textarea matInput [(ngModel)]="typeReparationDescription" name="description" placeholder="Description" rows="1"></textarea>
+          </mat-form-field>
+        </div>
+    
+        <!-- Temps estimé -->
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Temps estimé (en minutes)</mat-label>
+            <input matInput [(ngModel)]="typeReparationTempsEstime" name="temps_estime" type="number" placeholder="Temps estimé" required>
+          </mat-form-field>
+        </div>
+    
+        <!-- Prix de base -->
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Prix de base</mat-label>
+            <input matInput [(ngModel)]="typeReparationPrixBase" name="prix_base" type="number" step="0.01" placeholder="Prix de base" required>
+          </mat-form-field>
+        </div>
+    
+        <!-- Catégorie -->
+        <div class="col-lg-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Catégorie</mat-label>
+            <mat-select [(ngModel)]="selectedCategory" name="categories" required>
+              <mat-option *ngFor="let category of categories" [value]="category._id">{{ category.nom }}</mat-option>
+            </mat-select>
+          </mat-form-field>          
+        </div>        
+    
+      </div>
+    
+      <div class="m-t-12">
+        <button mat-flat-button color="primary" type="submit">Mettre à jour</button>
+      </div>
+    </form>
+    
+    
+    
+    
+  </mat-card-content>
+
+</mat-card>
