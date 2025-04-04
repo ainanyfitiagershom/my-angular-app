@@ -29,4 +29,10 @@ export class PaiementService {
   payerFacture(idFacture: string, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/payer/${idFacture}`, data, { headers: this.getHeaders() });
   }
+
+    // Récupérer les factures d'un client spécifique
+  getPaimentsByClient(idClient: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/client/${idClient}`, { headers: this.getHeaders() });
+  }
+  
 }
