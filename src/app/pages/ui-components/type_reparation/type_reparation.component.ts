@@ -41,7 +41,7 @@ export class AppTypeReparationComponent implements OnInit {
     temps_estime: null,
     prix_base: null,
   };
-  displayedColumns: string[] = ['numero', 'nom', 'description', 'temps_estime', 'prix_base', 'action'];
+  displayedColumns: string[] = ['numero', 'nom', 'description', 'category','temps_estime', 'prix_base','action'];
 
   constructor(private typeReparationService: TypeReparationService, private snackBar: MatSnackBar, private categorieService: CategorieService, private router: Router) {}
 
@@ -110,4 +110,7 @@ export class AppTypeReparationComponent implements OnInit {
     }
   }
 
+  goToUpdateTypeReparation(id: string): void {
+    this.router.navigate([`/ui-components/update_type_reparation/${id}`]); 
+  }
 }

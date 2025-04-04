@@ -39,6 +39,7 @@ import { AppTypeReparationComponent } from './type_reparation/type_reparation.co
 import { AppUpdateModelComponent } from './update_model/update_model.component';
 import { AppUpdatePieceComponent } from './update_piece/update_piece.component';
 import { AppUpdateNiveauComponent } from './update_niveau/update_niveau.component';
+import { AppUpdateTypeReparationComponent } from './update_type_reparation/update_type_reparation.component';
 
 
 export const UiComponentsRoutes: Routes = [
@@ -196,6 +197,10 @@ export const UiComponentsRoutes: Routes = [
       {
         path: 'update_niveau/:id',
         component: AppUpdateNiveauComponent
+      },
+      {
+        path: 'update_type_reparation/:id',
+        component: AppUpdateTypeReparationComponent
       }
       
     ],

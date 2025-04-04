@@ -75,6 +75,25 @@ export class AuthService {
     console.log("Utilisateur récupéré du localStorage :", user);
     return user;
   }
+
+  registerUser(username: string, email: string, password: string, tel: string, roleName: string, token?: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': token ? `Bearer ${token}` : ''  // Ajouter le token si disponible
+    });
   
+    return this.http.post(`${this.apiUrl}/register`, { username, email, password, tel, roleName }, { headers })
+      .pipe(
+        tap(response => {
+          console.log('Utilisateur inscrit avec succès', response);
+        })
+      );
+  }
+  
+  
+
+  getRoles(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/roles`);
+  }
   
 }
