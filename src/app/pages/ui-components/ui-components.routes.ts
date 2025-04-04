@@ -94,7 +94,7 @@ export const UiComponentsRoutes: Routes = [
         component: AppHistoriqueComponent
       },
       {
-        path: 'paiement',
+        path: 'paiement/:id',
         component: AppPaiementComponent
       },
       {

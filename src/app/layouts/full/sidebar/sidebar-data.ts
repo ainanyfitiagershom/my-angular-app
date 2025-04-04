@@ -36,11 +36,6 @@ export function getNavItems(role: string): NavItem[] {
     route: '/ui-components/lists_diag',
   },
   {
-    displayName: 'Liste reparation / pieces',
-    iconName: 'solar:settings-line-duotone',
-    route: '/ui-components/lists_reparation',
-  },
-  {
     navCap: 'Facture',
     divider: true
   },
