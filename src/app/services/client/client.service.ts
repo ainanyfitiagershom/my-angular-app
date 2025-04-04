@@ -64,4 +64,27 @@ export class ClientService {
   deleteClient(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
+
+  registerClient(data: {
+  username: string,
+  email: string,
+  password: string,
+  tel: string,
+  adresse: string
+}): Observable<any> {
+  return this.http.post(`${this.apiUrl}/Client`, {
+    nom: data.username,
+    email: data.email,
+    mdp: data.password,
+    contact: data.tel,
+    adresse: data.adresse
+  }, {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  }).pipe(
+    tap((response: any) => {
+      console.log("📝 Inscription réussie :", response);
+    })
+  );
+}
+
 }

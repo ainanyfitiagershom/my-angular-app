@@ -76,16 +76,16 @@ export class AuthService {
     return user;
   }
 
-  registerUser(username: string, email: string, password: string, tel: string, roleName: string, token?: string): Observable<any> {
+  registerUser(username: string, email: string, password: string, tel: string, roleName: string,  salaire_mensuel: number, token?: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': token ? `Bearer ${token}` : ''  // Ajouter le token si disponible
     });
   
-    return this.http.post(`${this.apiUrl}/register`, { username, email, password, tel, roleName }, { headers })
+    return this.http.post(`${this.apiUrl}/register`, { username, email, password, tel, roleName, salaire_mensuel}, { headers })
       .pipe(
         tap(response => {
-          console.log('Utilisateur inscrit avec succès', response);
+          console.log('Utilisateur inscrit avec succès', response); 
         })
       );
   }

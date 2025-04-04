@@ -20,13 +20,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link me-2" href="/login">
+            <a class="nav-link me-2" href="/authentication/login/client">
               <i class="fas fa-user-circle opacity-6  me-1"></i>
               Se connecter
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link me-2" href="/register">
+            <a class="nav-link me-2" href="/authentication/register/client">
               <i class="fas fa-key opacity-6  me-1"></i>
               S'inscrire
             </a>
@@ -59,34 +59,26 @@
           <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
             <div class="card z-index-0">
               <div class="card-header text-center pt-4">
-                <h5>S'incrire 🛠️</h5>
+                <h5>S'incrire en tant que client 🛠️</h5>
               </div>
 
               <div class="card-body">
                 <form (ngSubmit)="onSubmit()">
                   <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="nom" name="nom" aria-label="Nom" aria-describedby="email-addon">
+                    <input type="text" class="form-control" placeholder="Nom" [(ngModel)]="username" name="username" aria-label="Nom" aria-describedby="email-addon">
                   </div>
                   <div class="mb-3">
                     <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email" name="email" aria-label="Email" aria-describedby="email-addon">
                   </div>
                   <div class="mb-3">
-                    <input type="password" class="form-control" placeholder="Mot de passe" [(ngModel)]="mdp" name="mdp" aria-label="Password" aria-describedby="password-addon">
+                    <input type="password" class="form-control" placeholder="Mot de passe" [(ngModel)]="password" name="password" aria-label="Password" aria-describedby="password-addon">
                   </div>
                   <div class="mb-3">
-                    <input type="tel" class="form-control" placeholder="Téléphone" [(ngModel)]="contact" name="contact" aria-label="Téléphone">
+                    <input type="tel" class="form-control" placeholder="Téléphone" [(ngModel)]="tel" name="tel" aria-label="Téléphone">
                   </div>
                   <div class="mb-3">
-                    <label for="roleSelect">Rôle</label>
-                    <select id="roleSelect" class="form-control" [(ngModel)]="roleName" name="roleName" required>
-                      <option *ngFor="let role of roles" [value]="role.name">{{ role.name }}</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="">Salaire mensuel</label>
-                    <input type="number" class="form-control" placeholder="Salaire mensuel" [(ngModel)]="salaire_mensuel" name="salaire_mensuel" aria-label="Salaire" required>
-                  </div>
-                  
+                    <input type="text" class="form-control" placeholder="Adresse" [(ngModel)]="adresse" name="adresse" aria-label="Adresse">
+                  </div>                  
                 
                   <div class="form-check form-check-info text-left">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
