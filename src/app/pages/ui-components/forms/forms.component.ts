@@ -12,6 +12,7 @@ import { VoitureService } from '../../../services/voiture/voiture.service';
 import { CategorieService } from '../../../services/categorie/categorie.service';
 import { CommonModule } from '@angular/common'; // Ajoute CommonModule
 import { RendezVousService } from '../../../services/rendezvous/rendezvous.service';
+import { Router } from '@angular/router';
 
 interface Food {
   value: string;
@@ -55,8 +56,8 @@ export class AppFormsComponent {
   constructor(
     private voitureService: VoitureService,
     private categorieService: CategorieService , // Injection du service pour récupérer les catégories
-    private rendezVousService: RendezVousService 
-    
+    private rendezVousService: RendezVousService ,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -131,6 +132,7 @@ export class AppFormsComponent {
       (response) => {
         console.log('Demande de rendez-vous envoyée', response);
         this.showAlert('success', 'Demande de rendez-vous envoyée');
+        this.router.navigate(['/ui-components/tables']);
       },
       (error) => {
         console.error('Erreur lors de l\'envoi de la demande de rendez-vous', error);

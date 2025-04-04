@@ -97,6 +97,7 @@ export class AppCommencerDiagComponent {
             location.reload();
           },
           (error) => {
+            location.reload();
             console.error('Erreur lors de l\'assignation de la réparation :', error);
           }
         );
@@ -122,6 +123,7 @@ export class AppCommencerDiagComponent {
             location.reload();
           },
           (error) => {
+            location.reload();
             console.error('Erreur lors de l\'assignation de la réparation :', error);
           }
         );

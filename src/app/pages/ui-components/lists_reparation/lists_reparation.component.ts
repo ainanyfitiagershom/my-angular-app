@@ -154,6 +154,7 @@ export class AppListsReparationComponent {
             (response) => {
               console.log('Réparation validée avec succès ! et Facturee', response);
               //location.reload(); // Cela recharge la page entière
+              this.router.navigate(['/ui-components/liste_facture']);
               // Rediriger ou effectuer des actions supplémentaires après l'assignation
               ///this.router.navigate(['ui-components/lists_reparation_manager',response.data.idDiagnostic]); // Exemple de redirection
             },
